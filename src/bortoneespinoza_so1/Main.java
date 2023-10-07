@@ -8,7 +8,7 @@ package bortoneespinoza_so1;
  *
  * @author isabe
  */
-public class BortoneEspinoza_SO1 {
+public class Main {
 
     /**
      * @param args the command line arguments
