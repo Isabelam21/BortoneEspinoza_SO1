@@ -15,23 +15,23 @@ import java.util.logging.Logger;
  * @author giubo
  */
 public class Integrador extends Thread{
-    int dias_esamblar;
+    int dias_esamblar; // Cada cuantos dias en integrador ensambla
     int salario;
     int id_empresa;
     int guiones;
     int niveles;
     int graficos;
     int sistemas_abundantes;
-    int ganancia;
-    Semaphore driveInt;
     Semaphore driveN;
     Semaphore driveDCL;
-    int juegos_esamblados;
-    int min_juegos;
+    int juegos_esamblados; 
+    int min_juegos; // Minimo de juegos para generar un DLC
     int dias_trabajados;
+    int juegos_temporal; //Contandor para saber cuantos juegos se tiene para crear un DLC
+    int dlcs; // Cantidad de dcls a tomar por cada n juegos (min juegos)
     
     //Constructor
-    public Integrador(int id_empresa, int guiones, int niveles, int graficos, int sistemas_abundantes, Semaphore driveInt, Semaphore driveN, Semaphore drive_DCL, int min_juegos) {
+    public Integrador(int id_empresa, int guiones, int niveles, int graficos, int sistemas_abundantes,  Semaphore driveN, Semaphore drive_DCL, int min_juegos, int dlcs) {
         this.dias_esamblar = 2;
         this.salario = salario;
         this.id_empresa = id_empresa;
@@ -39,12 +39,13 @@ public class Integrador extends Thread{
         this.niveles = niveles;
         this.graficos = graficos;
         this.sistemas_abundantes = sistemas_abundantes;
-        this.ganancia = ganancia;
-        this.driveInt = driveInt;
         this.driveN = driveN;
-        this.juegos_esamblados = 5;
+        this.juegos_esamblados = 0;
         this.min_juegos = min_juegos;
         this.dias_trabajados = 0;
+        this.juegos_temporal = 0;
+        this.dlcs = dlcs;
+
        
     }
     
@@ -67,37 +68,29 @@ public class Integrador extends Thread{
             } catch (InterruptedException ex) {
                 System.out.println("ERROR ENSAMBLADOR");
             }
-            esamblar();
+            esamblar(dlcs);
         }   
     }
     
     
     //Funcion para esamblar un videojuego
-     public void esamblar(){
-        if (driveN.availablePermits() >= guiones){ //HAY QUE TERMINAR DE AGREGAR LAS DEMAS CONDICIONES DE ESAMBLAMIENTO
-            try {
-                driveInt.acquire(1); 
-                driveN.release(guiones);
-                crear_DLC();
-                juegos_esamblados ++;
-                System.out.println("Juego agregado al drive del integrador");
-                System.out.println(driveInt.availablePermits());
-            } catch (InterruptedException ex) {
-                Logger.getLogger(DesarrolladorNarrativa.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Drive full, libere espacio");
-                System.out.println(driveInt.availablePermits());
+     public void esamblar(int dlcs){
+        if (driveN.availablePermits() == guiones){ //HAY QUE TERMINAR DE AGREGAR LAS DEMAS CONDICIONES DE ESAMBLAMIENTO
+            juegos_esamblados ++;
+            juegos_temporal ++;
+            driveN.release(guiones);
+           
+            if (juegos_temporal == min_juegos){
+                juegos_temporal = 0;
+                driveDCL.release(dlcs);
             }
+            
+            System.out.println("Juego agregado al drive del integrador");
+            
         }else{
             System.out.println("No se puede esamblar el juego ya que no se cuenta con los recursos");
         }
     
-    }
-    
-    public void crear_DLC(){
-        if (juegos_esamblados > this.min_juegos) {
-            //generarDLC();
-            this.juegos_esamblados =0;   
-        }
     }
     
 }
