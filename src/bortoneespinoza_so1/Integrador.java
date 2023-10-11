@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author giubo
  */
 public class Integrador extends Thread{
-    int dias_esamblar; // Cada cuantos dias en integrador ensambla
+    int dias_esamblar; //Cada cuantos dias en integrador ensambla
     int salario;
     int id_empresa;
     int guiones;
@@ -25,6 +25,7 @@ public class Integrador extends Thread{
     int sistemas_abundantes;
     Semaphore driveN;
     Semaphore driveDCL;
+    Semaphore driveNiveles;
     int juegos_esamblados; 
     int min_juegos; // Minimo de juegos para generar un DLC
     int dias_trabajados;
@@ -33,15 +34,19 @@ public class Integrador extends Thread{
     int permisos_ocupados;
  
     //Constructor
-    public Integrador(int id_empresa, int guiones, int niveles, int graficos, int sistemas_abundantes,  Semaphore driveN, Semaphore drive_DCL, int min_juegos, int dlcs) {
-        this.dias_esamblar = 2;
-        this.salario = salario;
+    public Integrador(int id_empresa, int guiones, int niveles, int graficos, int sistemas_abundantes,  Semaphore driveN, Semaphore drive_DCL, Semaphore driveNiveles, int min_juegos, int dlcs) {
         this.id_empresa = id_empresa;
+        // Condiciones para armar el juego
+        this.dias_esamblar = 2;
         this.guiones = guiones;
         this.niveles = niveles;
         this.graficos = graficos;
         this.sistemas_abundantes = sistemas_abundantes;
+        // Drives
         this.driveN = driveN;
+        this. driveNiveles = driveNiveles;
+        //variables
+        this.salario = salario;
         this.juegos_esamblados = 0;
         this.min_juegos = min_juegos;
         this.dias_trabajados = 0;
@@ -73,7 +78,7 @@ public class Integrador extends Thread{
                 dias_trabajados ++;
                 calcular_salario(dias_trabajados);
                
-                if (permisos_ocupados(25,driveN) >= guiones){
+                if ((permisos_ocupados(25,driveN) >= guiones) &&  (permisos_ocupados(20, driveNiveles) >= niveles)){
                     Thread.sleep(2000);
                     ensamblar(dlcs);
                 } else{ 

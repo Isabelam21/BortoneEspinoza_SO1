@@ -22,8 +22,6 @@ public class DesarrolladorDLC {
         this.dias_dcl = 3;
         this.dias_trabajados = 0;
         this.pago_por_hora = 8;
-        
-    
     }
    
     
