@@ -17,7 +17,6 @@ public class Nintendo {
     Semaphore driveSprites;
     Semaphore driveProgramador;
     Semaphore driveDCL;
-    Semaphore driveIntegrador;
     int guiones;
     int niveles;
     int graficos;
@@ -35,7 +34,6 @@ public class Nintendo {
         this.driveSprites = new Semaphore(55);
         this.driveProgramador = new Semaphore(35);
         this.driveDCL = new Semaphore(10);
-        this.driveIntegrador = new Semaphore(100000);
         this.guiones = 2;
         this.niveles = 1;
         this.graficos = 4;
@@ -46,11 +44,13 @@ public class Nintendo {
         this.dlcs = 2;    
     }
     
+    
+    // Getters para las variables miembro que deseas acceder desde fuera de la clase
     public Semaphore getDriveNarrativa() {
         return driveNarrativa;
     }
 
-    // Getters para las variables miembro que deseas acceder desde fuera de la clase
+    
     public int getGuiones() {
         return guiones;
     }
@@ -102,13 +102,16 @@ public class Nintendo {
     public Semaphore getDriveDCL() {
         return driveDCL;
     }
-
-    public Semaphore getDriveIntegrador() {
-        return driveIntegrador;
+    
+    public int getDriveDlcs() {
+        return dlcs;
     }
     
     
 
+ 
+    
+    
     // Setters para las variables miembro que deseas actualizar desde fuera de la clase
     public void setGuiones(int guiones) {
         this.guiones = guiones;
@@ -151,10 +154,7 @@ public class Nintendo {
         this.driveDCL = driveDCL;
     }
 
-    public void setDriveIntegrador(Semaphore driveIntegrador) {
-        this.driveIntegrador = driveIntegrador;
-    }
-
+    
     public void setGanancia_est(int ganancia_est) {
         this.ganancia_est = ganancia_est;
     }
