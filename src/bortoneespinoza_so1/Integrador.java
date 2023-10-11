@@ -75,7 +75,7 @@ public class Integrador extends Thread{
                
                 if (permisos_ocupados(25,driveN) >= guiones){
                     Thread.sleep(2000);
-                    esamblar(dlcs);
+                    ensamblar(dlcs);
                 } else{ 
                     System.out.println("No se puede esamblar el juego ya que no se cuenta con los recursos");
                 }
@@ -87,7 +87,7 @@ public class Integrador extends Thread{
     }
     
     //Funcion para esamblar un videojuego
-     public void esamblar(int dlcs){  //HAY QUE TERMINAR DE AGREGAR LAS DEMAS CONDICIONES DE ESAMBLAMIENTO
+     public void ensamblar(int dlcs){  //HAY QUE TERMINAR DE AGREGAR LAS DEMAS CONDICIONES DE ESAMBLAMIENTO
             juegos_esamblados ++;
             juegos_temporal ++;
             driveN.release(guiones);
