@@ -26,9 +26,9 @@ public class ArtistaSprites extends Thread{
    
     public ArtistaSprites(Semaphore driveS, int sprite_dias, int pago_por_hora, int empresa) {
         this.sueldo = 0;
-        this.sprite_dias = 3;
+        this.sprite_dias = 1;
         this.dias_trabajados = 0;
-        this.pago_por_hora = 13;
+        this.pago_por_hora = 20;
         this.driveS = driveS;
         this.id_empresa = id_empresa;
         this.dias_temporal = 0;
@@ -45,8 +45,8 @@ public class ArtistaSprites extends Thread{
     
     public void generarSprite(){
          try {
-            driveS.acquire(1);
-            sprites_generados++;
+            driveS.acquire(2);
+            sprites_generados = sprites_generados + 2;
             System.out.println("Nivel agregado al drive");
             
         } catch (InterruptedException ex) {

@@ -39,7 +39,7 @@ public class DesarrolladorDLC extends Thread{
     }
    
     // Metodo para generar el Guion por parte del desarrollador
-    public static void generarGuion(){
+    public static void generarDLC(){
          System.out.println("DESARROLLADOR");
         try {
             driveDLC.acquire(1);
@@ -65,7 +65,7 @@ public class DesarrolladorDLC extends Thread{
                 System.out.println("ERROR");
              }
         
-        generarGuion();
+        generarDLC();
             }   
     
     }
