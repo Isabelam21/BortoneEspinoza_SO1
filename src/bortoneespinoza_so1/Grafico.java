@@ -49,13 +49,15 @@ public class Grafico extends javax.swing.JFrame {
 
         Bg.setBackground(new java.awt.Color(0, 0, 0));
 
-        Principal.setText("Principal");
+        Principal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Principal.setText("Main");
         Principal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrincipalActionPerformed(evt);
             }
         });
 
+        Nintendo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Nintendo.setText("Nintendo");
         Nintendo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +65,7 @@ public class Grafico extends javax.swing.JFrame {
             }
         });
 
+        Bethesda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Bethesda.setText("Bethesda");
         Bethesda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
