@@ -14,6 +14,7 @@ public class BethesdaPanel extends javax.swing.JPanel {
      * Creates new form NintendoPanel
      */
     public BethesdaPanel() {
+        System.out.println("Bethesda");
         initComponents();
     }
 

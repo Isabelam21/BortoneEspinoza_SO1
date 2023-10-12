@@ -14,6 +14,7 @@ public class NintendoPanel extends javax.swing.JPanel {
      * Creates new form NintendoPanel
      */
     public NintendoPanel() {
+        System.out.println("Nintendo");
         initComponents();
     }
 
