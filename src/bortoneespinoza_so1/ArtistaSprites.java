@@ -4,25 +4,36 @@
  */
 package bortoneespinoza_so1;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author isabelam
  */
-public class ArtistaSprites {
+public class ArtistaSprites extends Thread{
     int sueldo;
-    int sprite_dia;
+    int sprite_dias;
     int dias_trabajados;
     int pago_por_hora;
+    Semaphore driveNiveles;
+    int id_empresa;
+    int dias_temporal;
+    int niveles_generados;
     
     
    
-    public ArtistaSprites() {
+    public ArtistaSprites(Semaphore drive, int sprite_dias, int pago_por_hora, int empresa) {
         this.sueldo = 0;
-        this.sprite_dia = 3;
+        this.sprite_dias = 3;
         this.dias_trabajados = 0;
-        this.pago_por_hora = 20;
-        
-         
+        this.pago_por_hora = 13;
+        this.driveNiveles = drive;
+        this.id_empresa = id_empresa;
+        this.dias_temporal = 0;
+        this.niveles_generados =0;
+  
     }
     
     public void calcular_salario (int dias_trabajados){
@@ -33,22 +44,33 @@ public class ArtistaSprites {
     }
     
     public void generarSprite(){
-        
+         try {
+            driveNiveles.acquire(1);
+            niveles_generados++;
+            System.out.println("Nivel agregado al drive");
+            
+        } catch (InterruptedException ex) {
+            System.out.println("Drive full, libere espacio");
+        }
+        dias_temporal = 0;
         
     }
     
-    
+    @Override
     public void run(){
-        while(dias_trabajados < sprite_dia)
+        while(dias_temporal <= sprite_dias)
              try {
-                 Thread.sleep(5000);
+                 Thread.sleep(1000);
                  dias_trabajados ++;
+                 dias_temporal ++;
                  calcular_salario(dias_trabajados);
                  
              } catch (InterruptedException ex) {
                 System.out.println("ERROR");
              }
+        
         generarSprite();
-   
-            }
-}
+            }   
+    
+    }
+
