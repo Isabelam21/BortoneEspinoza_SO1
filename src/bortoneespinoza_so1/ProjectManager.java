@@ -34,35 +34,35 @@ public class ProjectManager extends Thread {
     @Override
     public void run() {
         int horas = 0;
-        while (horas < 16) { // Trabaja durante las primeras 16 horas del día
-            try {
-                if (streams) {
-                    Thread.sleep(25); // 30 minutos para ver streams
-                    System.out.println("streams");
-                   
-                } else {
-                    Thread.sleep(25); // 30 minutos para trabajar
-                    System.out.println("trabajando");
+        while (true) { // Trabaja durante las primeras 16 horas del día
+            if (horas < 16){
+                try {
+                    if (streams) {
+                        Thread.sleep(25); // 30 minutos para ver streams
+                        System.out.println("streams");
+                    } else {
+                        Thread.sleep(25); // 30 minutos para trabajar
+                        System.out.println("trabajando");
+                    }
+                    streams = !streams; // Cambia entre ver streams y trabajar
+                    horas++; // Aumenta el contador de horas trabajadas
+                } catch (InterruptedException ex) {
+                    System.out.println("ERROR");
+                }       
+            }else{  // Las últimas 8 horas las invierte cambiando el contador de días restantes
+                try {
+                    dias_restantes--;
+                    Thread.sleep(600); // 30 minutos para cambiar el contador de días restantes
+                    System.out.println("Ultimas 8 horas (trabajando con el contador)");
+                } catch (InterruptedException ex) {
+                    System.out.println("ERROR");
                 }
-                streams = !streams; // Cambia entre ver streams y trabajar
-                horas++; // Aumenta el contador de horas trabajadas
-            } catch (InterruptedException ex) {
-                System.out.println("ERROR");
-            }
-          
-        }
-        // Las últimas 8 horas las invierte cambiando el contador de días restantes
-            try {
-                dias_restantes--;
-                Thread.sleep(600); // 30 minutos para cambiar el contador de días restantes
-                System.out.println("Ultimas 8 horas (trabajando con el contador)");
-            } catch (InterruptedException ex) {
-                System.out.println("ERROR");
-            }
             dias_trabajados++;
             calcular_salario(dias_trabajados);
-            
-            
+            horas = 0;
+            }
+        }
+       
     }
    
 
