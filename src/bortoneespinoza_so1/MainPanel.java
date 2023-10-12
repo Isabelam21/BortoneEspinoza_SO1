@@ -47,7 +47,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         bgGala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bgGala-modified.jpg"))); // NOI18N
         bgGala.setPreferredSize(new java.awt.Dimension(470, 410));
-        jPanel1.add(bgGala, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, -1));
+        jPanel1.add(bgGala, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 420));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 490));
     }// </editor-fold>//GEN-END:initComponents
