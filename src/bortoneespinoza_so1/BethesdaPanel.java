@@ -320,7 +320,7 @@ public class BethesdaPanel extends javax.swing.JPanel {
 
         BgBethesda.setBackground(new java.awt.Color(153, 153, 153));
         BgBethesda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bgBethesda1 (1)-modified.jpg"))); // NOI18N
-        jPanel1.add(BgBethesda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 490, 430));
+        jPanel1.add(BgBethesda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 480, 430));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 410));
     }// </editor-fold>//GEN-END:initComponents

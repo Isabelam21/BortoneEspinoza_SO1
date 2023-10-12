@@ -222,11 +222,23 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("Videojuegos listos:");
         jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 160, 30));
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
         jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 50, -1));
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
         jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 50, -1));
+
+        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
         jPanel1.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 50, -1));
+
+        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
         jPanel1.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 50, -1));
+
+        jSpinner5.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
         jPanel1.add(jSpinner5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 50, -1));
+
+        jSpinner6.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
         jPanel1.add(jSpinner6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 50, -1));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
