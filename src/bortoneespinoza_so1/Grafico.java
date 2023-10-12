@@ -19,7 +19,7 @@ public class Grafico extends javax.swing.JFrame {
         initComponents();
         
         MainPanel mp = new MainPanel();
-        mp.setSize(473,405);
+        mp.setSize(470,410);
         mp.setLocation(0, 0);
         
         content.removeAll();
@@ -123,7 +123,7 @@ public class Grafico extends javax.swing.JFrame {
 
     private void NintendoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NintendoActionPerformed
         NintendoPanel np = new NintendoPanel();
-        np.setSize(473,405);
+        np.setSize(470,410);
         np.setLocation(0, 0);
         
         content.removeAll();
@@ -134,7 +134,7 @@ public class Grafico extends javax.swing.JFrame {
 
     private void BethesdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BethesdaActionPerformed
         BethesdaPanel bp = new BethesdaPanel();
-        bp.setSize(473,405);
+        bp.setSize(470,410);
         bp.setLocation(0, 0);
         
         content.removeAll();
@@ -145,7 +145,7 @@ public class Grafico extends javax.swing.JFrame {
 
     private void PrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrincipalActionPerformed
         MainPanel mp = new MainPanel();
-        mp.setSize(473,405);
+        mp.setSize(470,410);
         mp.setLocation(0, 0);
         
         content.removeAll();
