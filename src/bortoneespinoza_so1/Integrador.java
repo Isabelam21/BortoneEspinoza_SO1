@@ -26,7 +26,7 @@ public class Integrador extends Thread{
     Semaphore driveN;
     Semaphore driveDCL;
     Semaphore driveNiveles;
-    int juegos_esamblados; 
+    static int juegos_esamblados; 
     int min_juegos; // Minimo de juegos para generar un DLC
     int dias_trabajados;
     int juegos_temporal; //Contandor para saber cuantos juegos se tiene para crear un DLC

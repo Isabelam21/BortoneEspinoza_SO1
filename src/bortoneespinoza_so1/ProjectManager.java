@@ -11,10 +11,11 @@ package bortoneespinoza_so1;
  */
 public class ProjectManager extends Thread {
     static int dias_restantes;
-    boolean streams;
-    int sueldo;
+    static boolean streams;
+    static int sueldo;
     int dias_trabajados;
     int pago_por_hora;
+    int faltas;
 
     public ProjectManager(int dias_restantes) {
         this.dias_restantes = dias_restantes;
@@ -22,6 +23,7 @@ public class ProjectManager extends Thread {
         this.sueldo = 0;
         this.dias_trabajados = dias_trabajados;
         this.pago_por_hora = 20;
+        this.faltas = 0; 
     }
     
     // Metodo para calcular el salario del desarrollador

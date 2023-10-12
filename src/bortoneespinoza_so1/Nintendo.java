@@ -23,6 +23,7 @@ public class Nintendo {
     int sistemas_abundantes;
     int ganancia_est;
     int ganancia_dlc;
+    static int ganancia_neta_nintendo;
     int dlcs;
     int min_juegos;
     
@@ -42,6 +43,7 @@ public class Nintendo {
         this.ganancia_dlc = 600000;
         this.min_juegos = 5;
         this.dlcs = 2;    
+        this.ganancia_neta_nintendo = 0;
     }
     
     
