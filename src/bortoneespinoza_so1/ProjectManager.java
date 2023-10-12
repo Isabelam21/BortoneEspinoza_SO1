@@ -4,14 +4,12 @@
  */
 package bortoneespinoza_so1;
 
-import bortoneespinoza_so1.BethesdaPanel;
 
 /**
  *
  * @author isa
  */
 public class ProjectManager extends Thread {
-
     static int dias_restantes;
     static boolean streams;
     static int sueldo;
@@ -25,19 +23,19 @@ public class ProjectManager extends Thread {
         this.sueldo = 0;
         this.dias_trabajados = dias_trabajados;
         this.pago_por_hora = 20;
-        this.faltas = 0;
+        this.faltas = 0; 
     }
-
+    
     // Metodo para calcular el salario del desarrollador
-    public void calcular_salario(int dias_trabajados) {
-        sueldo = (dias_trabajados * 24) * pago_por_hora;
+    public void calcular_salario (int dias_trabajados){
+        sueldo = (dias_trabajados  * 24) * pago_por_hora;  
     }
 
     @Override
     public void run() {
         int horas = 0;
         while (true) { // Trabaja durante las primeras 16 horas del día
-            if (horas < 16) {
+            if (horas < 16){
                 try {
                     if (streams) {
                         Thread.sleep(25); // 30 minutos para ver streams
@@ -50,8 +48,8 @@ public class ProjectManager extends Thread {
                     horas++; // Aumenta el contador de horas trabajadas
                 } catch (InterruptedException ex) {
                     System.out.println("ERROR");
-                }
-            } else {  // Las últimas 8 horas las invierte cambiando el contador de días restantes
+                }       
+            }else{  // Las últimas 8 horas las invierte cambiando el contador de días restantes
                 try {
                     dias_restantes--;
                     Thread.sleep(600); // 30 minutos para cambiar el contador de días restantes
@@ -59,12 +57,14 @@ public class ProjectManager extends Thread {
                 } catch (InterruptedException ex) {
                     System.out.println("ERROR");
                 }
-                dias_trabajados++;
-                calcular_salario(dias_trabajados);
-                horas = 0;
+            dias_trabajados++;
+            calcular_salario(dias_trabajados);
+            horas = 0;
             }
         }
-
+       
     }
+   
 
 }
+   
