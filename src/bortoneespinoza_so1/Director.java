@@ -13,7 +13,7 @@ import java.util.Random;
  * @author giubo
  */
 public class Director extends Thread {
-
+    
     int sueldo;
     int contador;
     int pago_por_hora;
@@ -58,12 +58,13 @@ public class Director extends Thread {
         contador = 0;
 
     }
+    
     // Vigilar al PM
     public void vigilar_pm() {
         faltas_pm++;
         sueldo_pm = sueldo_pm - 50;
     }
-
+    // Trabajo administrativo
     public void trabajo() {
         try {
             int randomN = new Random().nextInt(1000);
