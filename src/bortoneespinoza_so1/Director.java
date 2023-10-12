@@ -15,8 +15,8 @@ public class Director extends Thread {
     int dias_trabajados;
 
     public Director(int contador) {
-        this.sueldo = 0;
-        this.contador = 0;
+        this.sueldo = 30;
+        this.contador = contador;
         this.pago_por_hora =30;
         this.dias_trabajados = 0;
     }
