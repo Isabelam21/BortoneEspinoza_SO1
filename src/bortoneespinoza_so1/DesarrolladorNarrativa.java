@@ -55,8 +55,6 @@ public class DesarrolladorNarrativa extends Thread{
         dias_temporal = 0;
     }
    
-    
- 
     @Override
     public void run(){
         while(dias_temporal < dias_guion)

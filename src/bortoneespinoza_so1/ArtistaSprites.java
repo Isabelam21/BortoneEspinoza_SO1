@@ -10,7 +10,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  *
- * @author isabelam
+ * @author giubo
  */
 public class ArtistaSprites extends Thread{
     int sueldo;
