@@ -5,36 +5,47 @@
 package bortoneespinoza_so1;
 
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 
 /**
  *
  * @author isabe
  */
 public class NintendoPanel extends javax.swing.JPanel {
+        int spinner_narrativa;
+        Nintendo nintendo = new Nintendo();
 
-    // AQUI AGREGAS TODAS LAS VARIABLES QUE NECESITES
     
+   
     public NintendoPanel() {
-        
+
         initComponents();
         
+        int spinner_narrativa = (int) spinnerNarrativa.getValue();
         
-    }
+        if (spinner_narrativa == 1) {
+            DesarrolladorNarrativa desarrollador = new DesarrolladorNarrativa(nintendo.getDriveNarrativa(), 3, nintendo.getId());
+            desarrollador.start();
+        } else {
+            DesarrolladorNarrativa[] desarrolladoresNarrativa = new DesarrolladorNarrativa[spinner_narrativa];
+            for (int i = 0; i < spinner_narrativa; i++) {
+                desarrolladoresNarrativa[i] = new DesarrolladorNarrativa(nintendo.getDriveNarrativa(), 3, nintendo.getId());
+            }
 
-    public JLabel getGuionesND() {
-        return guionesND;
-    }
+            // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+            for (DesarrolladorNarrativa desarrollador : desarrolladoresNarrativa) {
+                desarrollador.start();
+              
+            }
+        }
+    
 
-    public void setGuionesND(JLabel guionesND) {
-        this.guionesND = guionesND;
     }
     
-    public static void actualizarGuionDrive(int nuevoValor) {
-        guionesND.setText(Integer.toString(nuevoValor));
-    }
+  
 
-        
-    
+  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,7 +88,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinnerNarrativa = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jSpinner3 = new javax.swing.JSpinner();
         jSpinner4 = new javax.swing.JSpinner();
@@ -232,7 +243,10 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("Videojuegos listos:");
         jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 160, 30));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 50, -1));
+
+        spinnerNarrativa.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
+        spinnerNarrativa.setOpaque(true);
+        jPanel1.add(spinnerNarrativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 50, -1));
         jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 50, -1));
         jPanel1.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 50, -1));
         jPanel1.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 50, -1));
@@ -286,13 +300,12 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JSpinner jSpinner5;
     private javax.swing.JSpinner jSpinner6;
+    public static javax.swing.JSpinner spinnerNarrativa;
     // End of variables declaration//GEN-END:variables
-    
 
 }

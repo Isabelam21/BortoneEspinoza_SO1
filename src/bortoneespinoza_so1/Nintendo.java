@@ -5,6 +5,7 @@
 package bortoneespinoza_so1;
 
 import java.util.concurrent.Semaphore;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -46,7 +47,8 @@ public class Nintendo {
         this.ganancia_neta_nintendo = 0;
     }
     
-    
+  
+   
     // Getters para las variables miembro que deseas acceder desde fuera de la clase
     public Semaphore getDriveNarrativa() {
         return driveNarrativa;
