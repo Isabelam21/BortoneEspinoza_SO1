@@ -26,16 +26,17 @@ public class Bethesda {
     int ganancia_dlc;
     int dlcs;
     int min_juegos;
+    static int ganancia_neta_bethesda;
 
     public Bethesda() {
         //Indentificacion empresa
         this.id = 2;
         //Drives
-        this.driveNarrativa = driveNarrativa;
-        this.driveNiveles = driveNiveles;
-        this.driveSprites = driveSprites;
-        this.driveProgramador = driveProgramador;
-        this.driveDCL = driveDCL;
+        this.driveNarrativa = new Semaphore(25); // Debes proporcionar un número de permisos para el Semaphore
+        this.driveNiveles = new Semaphore(20);
+        this.driveSprites = new Semaphore(55);
+        this.driveProgramador = new Semaphore(35);
+        this.driveDCL = new Semaphore(10);
         // Nescarios para esamblar un juego
         this.guiones = 2;
         this.niveles = 3;
@@ -46,6 +47,7 @@ public class Bethesda {
         // Condiciones
         this.dlcs = 5;
         this.min_juegos = 6;
+        this.ganancia_neta_bethesda = 0;
     }
 
     public int getId() {

@@ -18,7 +18,7 @@ public class DesarrolladorDLC extends Thread {
     int dias_trabajados;
     int pago_por_hora;
     static Semaphore driveDLC;
-    int id_empresa;
+    static int id_empresa;
     static int dias_temporal;
     static int guiones_generados;
 
@@ -46,6 +46,13 @@ public class DesarrolladorDLC extends Thread {
         try {
             driveDLC.acquire(1);
             guiones_generados++;
+            
+            if (id_empresa == 1){                          
+                NintendoPanel.actualizarDCL(guiones_generados);
+            }else{
+                BethesdaPanel.actualizarDCL(guiones_generados);
+            }
+            
             System.out.println("DLC agregado al drive");
         } catch (InterruptedException ex) {
 

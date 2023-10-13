@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package bortoneespinoza_so1;
-import bortoneespinoza_so1.Main;
-import static bortoneespinoza_so1.NintendoPanel.guionesND;
-import static bortoneespinoza_so1.NintendoPanel.pm;
+
+import static bortoneespinoza_so1.BethesdaPanel.guionesND2;
+import static bortoneespinoza_so1.BethesdaPanel.pm2;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -14,26 +16,351 @@ import static bortoneespinoza_so1.NintendoPanel.pm;
 public class BethesdaPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form NintendoPanel
+     * Creates new form Panel
      */
     int spinner_narrativa;
+    int spinner_niveles;
+    int spinner_sprites;
+    int spinner_sistemicos;
+    int spinner_dcls;
+    int spinner_integradores;
     int cant_desarrolladores;
+    int cant_disenadores;
+    int cant_artistas;
+    int cant_sistemas;
+    int cant_dcls;
+    int cant_videojuegos;
+    int cant_estandar;
+    int cant_dcl;
     Bethesda bethesda = new Bethesda();
-    ProjectManager hilo7 = new ProjectManager(3);
+    ProjectManager hiloPM = new ProjectManager(3,bethesda.getId());
 
     public static void actualizarGuionesEnDrive(int nuevoValor) {
-        guionesND.setText(Integer.toString(nuevoValor));
+        guionesND2.setText(Integer.toString(nuevoValor));
     }
 
     public static void actualizarValuePm(String nuevoValor) {
-        pm.setText(nuevoValor);
+        pm2.setText(nuevoValor);
+    }
+    
+    public static void actualizarNiveles(int nuevoValor) {
+        niveles.setText(Integer.toString(nuevoValor));
+    }
+    
+    public static void actualizarSprites(int nuevoValor) {
+        sprites.setText(Integer.toString(nuevoValor));
+    }
+    
+        
+    public static void actualizarSistemas(int nuevoValor) {
+        sistemas.setText(Integer.toString(nuevoValor));
+    }
+    
+    public static void actualizarDCL(int nuevoValor) {
+        dcl_s.setText(Integer.toString(nuevoValor));
+    }
+    
+    public static void actualizarVideojuegos(int nuevoValor) {
+        z.setText(Integer.toString(nuevoValor));
+    }
+    
+    public static void actualizarEstandar(int nuevoValor) {
+        est.setText(Integer.toString(nuevoValor));
+    }
+    
+    public static void actualizarDcl(int nuevoValor) {
+        Dcl.setText(Integer.toString(nuevoValor));
+    }
+    
+    public static void actualizarVideojuegosListos(int nuevoValor) {
+        x.setText(Integer.toString(nuevoValor));
     }
     
     public BethesdaPanel() {
         
         initComponents();
+        spinner_narrativa = (int) spinnerNarrativa.getValue();
+        spinner_niveles = (int) spinnerNiveles.getValue();
+        
+        // Crear hilos desarollador narrativa
+        hiloPM.start();
+        if (spinner_narrativa == 1) {
+            DesarrolladorNarrativa desarrollador2 = new DesarrolladorNarrativa(bethesda.getDriveNarrativa(), 3, bethesda.getId());
+            cant_desarrolladores++;
+            System.out.println(cant_desarrolladores);
+            desarrollador2.start();
+        }
+
+        spinnerNarrativa.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("AAAAA");
+                int nuevoValorSpinner = (int) spinnerNarrativa.getValue();
+
+                DesarrolladorNarrativa[] desarrolladoresNarrativa = new DesarrolladorNarrativa[spinner_narrativa];
+                if (nuevoValorSpinner > spinner_narrativa) {
+
+                    for (int i = 0; i < spinner_narrativa; i++) {
+                        desarrolladoresNarrativa[i] = new DesarrolladorNarrativa(bethesda.getDriveNarrativa(), 3, bethesda.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (DesarrolladorNarrativa desarrollador : desarrolladoresNarrativa) {
+                        cant_desarrolladores++;
+                        System.out.println(cant_desarrolladores);
+                        desarrollador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_narrativa = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_narrativa) {
+                    for (int i = 0; i < spinner_narrativa; i++) {
+                        if (desarrolladoresNarrativa[i] != null) {
+                            cant_desarrolladores--;
+                            System.out.println(cant_desarrolladores);
+                            desarrolladoresNarrativa[i].interrupt();
+                        }
+                    }
+
+                }
+            }
+        }
+        );
+        
+        //Diseñador de niveles
+        
+     if (spinner_niveles == 1) {
+            DisenadorNiveles disenador2 = new DisenadorNiveles(bethesda.getDriveNiveles(), 13,4,1,13, bethesda.getId());
+            cant_disenadores++;
+            System.out.println(cant_disenadores);
+            disenador2.start();
+        }
+
+        spinnerNiveles.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("AAAAA");
+                int nuevoValorSpinner = (int) spinnerNiveles.getValue();
+                
+
+                DisenadorNiveles[] disenadorNiveles = new DisenadorNiveles[spinner_niveles];
+                if (nuevoValorSpinner > spinner_niveles) {
+
+                    for (int i = 0; i < spinner_niveles; i++) {
+                        disenadorNiveles[i] = new DisenadorNiveles(bethesda.getDriveNiveles(), 13,4,1,13, bethesda.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (DisenadorNiveles desarrollador : disenadorNiveles) {
+                        cant_disenadores++;
+                        System.out.println(cant_disenadores);
+                        desarrollador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_niveles = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_niveles) {
+                    for (int i = 0; i < spinner_niveles; i++) {
+                        if (disenadorNiveles[i] != null) {
+                            cant_disenadores--;
+                            System.out.println(cant_disenadores);
+                            disenadorNiveles[i].interrupt();
+                        }
+                    }
+
+                }
+            }
+        }
+        );
+        
+    //Artista de sprites
+        
+        if (spinner_sprites == 1) {
+            ArtistaSprites artistaSprites = new ArtistaSprites(bethesda.getDriveNiveles(), 4,20, bethesda.getId());
+            cant_artistas++;
+            System.out.println(cant_artistas);
+            artistaSprites.start();
+        }
+
+        spinnerSprites.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("AAAAA");
+                int nuevoValorSpinner = (int) spinnerSprites.getValue();
+                
+
+                ArtistaSprites[] artistaSprites = new ArtistaSprites[spinner_sprites];
+                if (nuevoValorSpinner > spinner_sprites) {
+
+                    for (int i = 0; i < spinner_sprites; i++) {
+                        artistaSprites[i] = new ArtistaSprites(bethesda.getDriveNiveles(), 4,20, bethesda.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (ArtistaSprites artista : artistaSprites) {
+                        cant_artistas++;
+                        System.out.println(cant_artistas);
+                        artista.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_sprites = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_sprites) {
+                    for (int i = 0; i < spinner_sprites; i++) {
+                        if (artistaSprites[i] != null) {
+                            cant_artistas--;
+                            System.out.println(cant_artistas);
+                            artistaSprites[i].interrupt();
+                        }
+                    }
+
+                }
+            }
+        }
+        );  
+        
+        
+          //Programador de logica
+        
+        if (spinner_sistemicos == 1) {
+            Programador programador = new Programador(bethesda.getDriveNiveles(), 3,8, bethesda.getId());
+            cant_sistemas++;
+            System.out.println(cant_sistemas);
+            programador.start();
+        }
+
+        spinnerSprites.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("AAAAA");
+                int nuevoValorSpinner = (int) spinnerSprites.getValue();
+                
+
+                Programador[] programador = new Programador[spinner_sistemicos];
+                if (nuevoValorSpinner > spinner_sistemicos) {
+
+                    for (int i = 0; i < spinner_sistemicos; i++) {
+                        programador[i] = new Programador(bethesda.getDriveNiveles(), 3,8, bethesda.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (Programador sistemico : programador) {
+                        cant_sistemas++;
+                        System.out.println(cant_sistemas);
+                        sistemico.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_sistemicos = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_sistemicos) {
+                    for (int i = 0; i < spinner_sistemicos; i++) {
+                        if (programador[i] != null) {
+                            cant_sistemas--;
+                            System.out.println(cant_sistemas);
+                            programador[i].interrupt();
+                        }
+                    }
+
+                }
+            }
+        }
+        ); 
+    
+           //Desarrollador DCL
+        
+        if (spinner_dcls == 1) {
+            DesarrolladorDLC desarrolladorDCL = new DesarrolladorDLC(bethesda.getDriveNiveles(), 3,17, bethesda.getId());
+            cant_dcls++;
+            System.out.println(cant_dcls);
+            desarrolladorDCL.start();
+        }
+
+        spinnerSprites.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("AAAAA");
+                int nuevoValorSpinner = (int) spinnerSprites.getValue();
+                
+
+                DesarrolladorDLC[] desarrolladorDCL = new DesarrolladorDLC[spinner_dcls];
+                if (nuevoValorSpinner > spinner_dcls) {
+
+                    for (int i = 0; i < spinner_dcls; i++) {
+                        desarrolladorDCL[i] = new DesarrolladorDLC(bethesda.getDriveNiveles(), 3,17, bethesda.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (DesarrolladorDLC desarrollador : desarrolladorDCL) {
+                        cant_dcls++;
+                        System.out.println(cant_dcls);
+                        desarrollador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_dcls = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_dcls) {
+                    for (int i = 0; i < spinner_dcls; i++) {
+                        if (desarrolladorDCL[i] != null) {
+                            cant_dcls--;
+                            System.out.println(cant_dcls);
+                            desarrolladorDCL[i].interrupt();
+                        }
+                    }
+
+                }
+            }
+        }
+        ); 
+        
+        
+           //Integrador
+        
+        if (spinner_sprites == 1) {
+            DisenadorNiveles disenador2 = new DisenadorNiveles(bethesda.getDriveNiveles(), 13,3,1,13, bethesda.getId());
+            cant_artistas++;
+            System.out.println(cant_artistas);
+            disenador2.start();
+        }
+
+        spinnerSprites.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("AAAAA");
+                int nuevoValorSpinner = (int) spinnerSprites.getValue();
+                
+
+                DisenadorNiveles[] disenadorNiveles = new DisenadorNiveles[spinner_sprites];
+                if (nuevoValorSpinner > spinner_sprites) {
+
+                    for (int i = 0; i < spinner_sprites; i++) {
+                        disenadorNiveles[i] = new DisenadorNiveles(bethesda.getDriveNiveles(), 13,3,1,13, bethesda.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (DisenadorNiveles desarrollador : disenadorNiveles) {
+                        cant_artistas++;
+                        System.out.println(cant_artistas);
+                        desarrollador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_sprites = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_sprites) {
+                    for (int i = 0; i < spinner_sprites; i++) {
+                        if (disenadorNiveles[i] != null) {
+                            cant_artistas--;
+                            System.out.println(cant_artistas);
+                            disenadorNiveles[i].interrupt();
+                        }
+                    }
+
+                }
+            }
+        }
+        ); 
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,25 +402,25 @@ public class BethesdaPanel extends javax.swing.JPanel {
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        jSpinner3 = new javax.swing.JSpinner();
+        spinnerNarrativa = new javax.swing.JSpinner();
+        spinnerNiveles = new javax.swing.JSpinner();
+        spinnerSprites = new javax.swing.JSpinner();
         jSpinner4 = new javax.swing.JSpinner();
         jSpinner5 = new javax.swing.JSpinner();
         jSpinner6 = new javax.swing.JSpinner();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
+        niveles = new javax.swing.JLabel();
+        sprites = new javax.swing.JLabel();
+        sistemas = new javax.swing.JLabel();
+        dcl_s = new javax.swing.JLabel();
+        z = new javax.swing.JLabel();
+        x = new javax.swing.JLabel();
+        est = new javax.swing.JLabel();
+        Dcl = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        guionesND2 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        pm = new javax.swing.JLabel();
+        pm2 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
@@ -190,7 +517,7 @@ public class BethesdaPanel extends javax.swing.JPanel {
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("/1 ->3 días");
+        jLabel22.setText("/1 ->4 días");
         jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -209,22 +536,22 @@ public class BethesdaPanel extends javax.swing.JPanel {
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("/2 día");
+        jLabel26.setText("/1 día");
         jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setText("/3 día");
+        jLabel27.setText("/5 día");
         jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("/1 ->3 días");
+        jLabel28.setText("/1 ->4 días");
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, -1, -1));
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel29.setText("/1 ->3 días");
+        jLabel29.setText("/1 ->2 días");
         jPanel1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -244,14 +571,14 @@ public class BethesdaPanel extends javax.swing.JPanel {
         jLabel32.setText("Videojuegos listos:");
         jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 160, 30));
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 50, -1));
+        spinnerNarrativa.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
+        jPanel1.add(spinnerNarrativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 50, -1));
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
-        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 50, -1));
+        spinnerNiveles.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
+        jPanel1.add(spinnerNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 50, -1));
 
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
-        jPanel1.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 50, -1));
+        spinnerSprites.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
+        jPanel1.add(spinnerSprites, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 50, -1));
 
         jSpinner4.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
         jPanel1.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 50, -1));
@@ -262,37 +589,37 @@ public class BethesdaPanel extends javax.swing.JPanel {
         jSpinner6.setModel(new javax.swing.SpinnerNumberModel(1, 1, 13, 1));
         jPanel1.add(jSpinner6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 50, -1));
 
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setText("0");
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 20, -1));
+        niveles.setForeground(new java.awt.Color(255, 255, 255));
+        niveles.setText("0");
+        jPanel1.add(niveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 20, -1));
 
-        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setText("0");
-        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 20, -1));
+        sprites.setForeground(new java.awt.Color(255, 255, 255));
+        sprites.setText("0");
+        jPanel1.add(sprites, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 20, -1));
 
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setText("0");
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 20, -1));
+        sistemas.setForeground(new java.awt.Color(255, 255, 255));
+        sistemas.setText("0");
+        jPanel1.add(sistemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 20, -1));
 
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("0");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 20, -1));
+        dcl_s.setForeground(new java.awt.Color(255, 255, 255));
+        dcl_s.setText("0");
+        jPanel1.add(dcl_s, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 20, -1));
 
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setText("0");
-        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 20, -1));
+        z.setForeground(new java.awt.Color(255, 255, 255));
+        z.setText("0");
+        jPanel1.add(z, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 20, -1));
 
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("0");
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 20, -1));
+        x.setForeground(new java.awt.Color(255, 255, 255));
+        x.setText("0");
+        jPanel1.add(x, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 20, -1));
 
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("0");
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 20, -1));
+        est.setForeground(new java.awt.Color(255, 255, 255));
+        est.setText("0");
+        jPanel1.add(est, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 20, -1));
 
-        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel42.setText("0");
-        jPanel1.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 20, -1));
+        Dcl.setForeground(new java.awt.Color(255, 255, 255));
+        Dcl.setText("0");
+        jPanel1.add(Dcl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 20, -1));
 
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setText("0");
@@ -302,18 +629,18 @@ public class BethesdaPanel extends javax.swing.JPanel {
         jLabel41.setText("Estado");
         jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 160, 20));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("0");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 20, -1));
+        guionesND2.setForeground(new java.awt.Color(255, 255, 255));
+        guionesND2.setText("0");
+        jPanel1.add(guionesND2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 20, -1));
 
         jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(255, 255, 255));
         jLabel43.setText("Descontado:");
         jPanel1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 70, 20));
 
-        pm.setForeground(new java.awt.Color(255, 255, 255));
-        pm.setText("Estado");
-        jPanel1.add(pm, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 170, 20));
+        pm2.setForeground(new java.awt.Color(255, 255, 255));
+        pm2.setText("Estado");
+        jPanel1.add(pm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 170, 20));
 
         jLabel45.setForeground(new java.awt.Color(255, 255, 255));
         jLabel45.setText("0");
@@ -337,7 +664,11 @@ public class BethesdaPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel BgBethesda;
+    public static javax.swing.JLabel BgBethesda;
+    public static javax.swing.JLabel Dcl;
+    public static javax.swing.JLabel dcl_s;
+    public static javax.swing.JLabel est;
+    public static javax.swing.JLabel guionesND2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -349,7 +680,6 @@ public class BethesdaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -364,19 +694,11 @@ public class BethesdaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
+    public static javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel45;
+    public static javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
@@ -385,12 +707,17 @@ public class BethesdaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JSpinner jSpinner5;
     private javax.swing.JSpinner jSpinner6;
-    public static javax.swing.JLabel pm;
+    public static javax.swing.JLabel niveles;
+    public static javax.swing.JLabel pm2;
+    public static javax.swing.JLabel sistemas;
+    private javax.swing.JSpinner spinnerNarrativa;
+    private javax.swing.JSpinner spinnerNiveles;
+    private javax.swing.JSpinner spinnerSprites;
+    public static javax.swing.JLabel sprites;
+    public static javax.swing.JLabel x;
+    public static javax.swing.JLabel z;
     // End of variables declaration//GEN-END:variables
 }

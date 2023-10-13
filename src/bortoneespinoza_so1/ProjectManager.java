@@ -16,14 +16,16 @@ public class ProjectManager extends Thread {
     int dias_trabajados;
     int pago_por_hora;
     int faltas;
+    static int id_empresa;
 
-    public ProjectManager(int dias_restantes) {
+    public ProjectManager(int dias_restantes, int empresa) {
         this.dias_restantes = dias_restantes;
         this.streams = true;
         this.sueldo = 0;
         this.dias_trabajados = dias_trabajados;
         this.pago_por_hora = 20;
         this.faltas = 0;
+        this.id_empresa = empresa;
     }
 
     // Metodo para calcular el salario del desarrollador
@@ -46,10 +48,19 @@ public class ProjectManager extends Thread {
                     }
                     if (streams) {
                         String valor_pm = "Viendo Streams";
-                        NintendoPanel.actualizarValuePm(valor_pm);
+                        if (id_empresa == 1){                          
+                            NintendoPanel.actualizarValuePm(valor_pm);
+                        }else{
+                            BethesdaPanel.actualizarValuePm(valor_pm);
+                        }
                     } else {
                         String valor_pm = "Trabajando";
-                        NintendoPanel.actualizarValuePm(valor_pm);
+                        if (id_empresa == 1){                          
+                            NintendoPanel.actualizarValuePm(valor_pm);
+                        }else{
+                            BethesdaPanel.actualizarValuePm(valor_pm);
+                        }
+                        
                     }
                     streams = !streams; // Cambia entre ver streams y trabajar
                     horas++; // Aumenta el contador de horas trabajadas

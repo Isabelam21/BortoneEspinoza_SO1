@@ -19,9 +19,10 @@ public class DisenadorNiveles extends Thread {
     int dias_trabajados;
     int pago_por_hora;
     static Semaphore driveNiveles;
-    int id_empresa;
+    static int id_empresa;
     static int dias_temporal;
     static int niveles_generados;
+    
 
     public DisenadorNiveles(Semaphore drive, int sueldo, int dias_nivel, int dias_trabajados, int pago_por_hora, int empresa) {
         this.sueldo = 0;
@@ -39,10 +40,17 @@ public class DisenadorNiveles extends Thread {
 
     // Metodo para generar el Nivel por parte del desarrollador
     public static void generarNivel() {
-        System.out.println("DESARROLLADOR");
+        System.out.println("DISEÑADOR");
         try {
             driveNiveles.acquire(1);
             niveles_generados++;
+            
+            if (id_empresa == 1){                          
+                NintendoPanel.actualizarNiveles(niveles_generados);
+            }else{
+                BethesdaPanel.actualizarNiveles(niveles_generados);
+            }
+            
             System.out.println("Nivel agregado al drive");
             System.out.println("Niveles generados: " + niveles_generados);
 

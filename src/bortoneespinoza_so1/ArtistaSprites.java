@@ -4,6 +4,8 @@
  */
 package bortoneespinoza_so1;
 
+import static bortoneespinoza_so1.DesarrolladorNarrativa.guiones_generados;
+import static bortoneespinoza_so1.DesarrolladorNarrativa.id_empresa;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.concurrent.Semaphore;
@@ -46,6 +48,13 @@ public class ArtistaSprites extends Thread {
         try {
             driveS.acquire(2);
             sprites_generados = sprites_generados + 2;
+            
+            if (id_empresa == 1){                          
+                NintendoPanel.actualizarSprites(sprites_generados);
+            }else{
+                BethesdaPanel.actualizarSprites(sprites_generados);
+            }
+            
             System.out.println("Nivel agregado al drive");
 
         } catch (InterruptedException ex) {

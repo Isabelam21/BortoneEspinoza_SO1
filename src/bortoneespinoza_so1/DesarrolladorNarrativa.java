@@ -19,7 +19,7 @@ public class DesarrolladorNarrativa extends Thread {
     int dias_trabajados;
     int pago_por_hora;
     static Semaphore driveN;
-    int id_empresa;
+    static int id_empresa;
     static int dias_temporal;
     static int guiones_generados;
 
@@ -32,7 +32,7 @@ public class DesarrolladorNarrativa extends Thread {
         this.driveN = drive;
         this.id_empresa = empresa;
         this.dias_temporal = 0;
-        this.guiones_generados = 0;
+        
 
     }
 
@@ -47,7 +47,13 @@ public class DesarrolladorNarrativa extends Thread {
         try {
             driveN.acquire(1);
             guiones_generados++;
-            NintendoPanel.actualizarGuionesEnDrive(guiones_generados);
+            
+            if (id_empresa == 1){                          
+                NintendoPanel.actualizarGuionesEnDrive(guiones_generados);
+            }else{
+                BethesdaPanel.actualizarGuionesEnDrive(guiones_generados);
+            }
+            
             System.out.println("Guion agregado al drive");
             System.out.println("Guiones generados: " + guiones_generados);
 

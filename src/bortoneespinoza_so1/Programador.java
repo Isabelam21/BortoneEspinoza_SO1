@@ -44,6 +44,13 @@ public class Programador extends Thread {
         try {
             driveP.acquire(3);
             sistemas_generados = sistemas_generados + 3;
+            
+            if (id_empresa == 1){                          
+                NintendoPanel.actualizarSistemas(sistemas_generados);
+            }else{
+                BethesdaPanel.actualizarSistemas(sistemas_generados);
+            }
+            
             System.out.println("Nivel agregado al drive");
 
         } catch (InterruptedException ex) {
