@@ -12,7 +12,8 @@ import java.util.concurrent.Semaphore;
  *
  * @author giubortone
  */
-public class DisenadorNiveles extends Thread{
+public class DisenadorNiveles extends Thread {
+
     int sueldo;
     int dias_nivel;
     int dias_trabajados;
@@ -30,44 +31,42 @@ public class DisenadorNiveles extends Thread{
         this.pago_por_hora = 13;
         this.id_empresa = id_empresa;
     }
-    
-    
+
     // Metodo para calcular el salario del desarrollador
-    public void calcular_salario (int dias_trabajados){
-        sueldo = (dias_trabajados  * 24) * pago_por_hora;    
+    public void calcular_salario(int dias_trabajados) {
+        sueldo = (dias_trabajados * 24) * pago_por_hora;
     }
-    
+
     // Metodo para generar el Nivel por parte del desarrollador
-    public static void generarNivel(){
-         System.out.println("DESARROLLADOR");
+    public static void generarNivel() {
+        System.out.println("DESARROLLADOR");
         try {
             driveNiveles.acquire(1);
             niveles_generados++;
             System.out.println("Nivel agregado al drive");
             System.out.println("Niveles generados: " + niveles_generados);
-            
+
         } catch (InterruptedException ex) {
             System.out.println("Drive full, libere espacio");
         }
         dias_temporal = 0;
     }
-    
-    
+
     @Override
-    public void run(){
-        while(dias_temporal < dias_nivel)
-             try {
-                 Thread.sleep(1000);
-                 dias_trabajados ++;
-                 dias_temporal ++;
-                 calcular_salario(dias_trabajados);
-                 
-             } catch (InterruptedException ex) {
+    public void run() {
+        while (dias_temporal < dias_nivel) {
+            try {
+                Thread.sleep(1000);
+                dias_trabajados++;
+                dias_temporal++;
+                calcular_salario(dias_trabajados);
+
+            } catch (InterruptedException ex) {
                 System.out.println("ERROR");
-             }
-        
-        generarNivel();
-            }   
-    
+            }
+
+            generarNivel();
+        }
     }
-    
+
+}
