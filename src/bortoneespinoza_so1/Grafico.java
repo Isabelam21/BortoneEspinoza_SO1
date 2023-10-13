@@ -12,18 +12,41 @@ import java.awt.BorderLayout;
  */
 public class Grafico extends javax.swing.JFrame {
 
+    public MainPanel mainPanel;
+    public NintendoPanel nintendoPanel;
+    public BethesdaPanel bethesdaPanel;
+
     /**
      * Creates new form Grafico
      */
     public Grafico() {
         initComponents();
-        
-        MainPanel mp = new MainPanel();
-        mp.setSize(470,410);
-        mp.setLocation(0, 0);
-        
+
+        // Inicializa los paneles una sola vez
+        mainPanel = new MainPanel();
+        nintendoPanel = new NintendoPanel();
+        bethesdaPanel = new BethesdaPanel();
+
+        showMainPanel();
+    }
+
+    private void showMainPanel() {
         content.removeAll();
-        content.add(mp, BorderLayout.CENTER);
+        content.add(mainPanel, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }
+
+    private void showNintendoPanel() {
+        content.removeAll();
+        content.add(nintendoPanel, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }
+
+    private void showBethesdaPanel() {
+        content.removeAll();
+        content.add(bethesdaPanel, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
     }
@@ -122,36 +145,15 @@ public class Grafico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NintendoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NintendoActionPerformed
-        NintendoPanel np = new NintendoPanel();
-        np.setSize(470,410);
-        np.setLocation(0, 0);
-        
-        content.removeAll();
-        content.add(np, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+        showNintendoPanel();
     }//GEN-LAST:event_NintendoActionPerformed
 
     private void BethesdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BethesdaActionPerformed
-        BethesdaPanel bp = new BethesdaPanel();
-        bp.setSize(470,410);
-        bp.setLocation(0, 0);
-        
-        content.removeAll();
-        content.add(bp, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+        showBethesdaPanel();
     }//GEN-LAST:event_BethesdaActionPerformed
 
     private void PrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrincipalActionPerformed
-        MainPanel mp = new MainPanel();
-        mp.setSize(470,410);
-        mp.setLocation(0, 0);
-        
-        content.removeAll();
-        content.add(mp, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+        showMainPanel();
     }//GEN-LAST:event_PrincipalActionPerformed
 
     /**

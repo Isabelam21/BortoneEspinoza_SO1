@@ -50,6 +50,7 @@ public class Director extends Thread {
     // Metodo para calcular el salario del desarrollador
     public void calcular_salario(int dias_trabajados) {
         sueldo = (dias_trabajados * 24) * pago_por_hora;
+        Nintendo.costos_operativos += sueldo;
     }
 
     // Funcion para enviar juegos a tienda si estan listos

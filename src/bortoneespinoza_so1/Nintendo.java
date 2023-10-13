@@ -25,7 +25,9 @@ public class Nintendo {
     int sistemas_abundantes;
     int ganancia_est;
     int ganancia_dlc;
-    static int ganancia_neta_nintendo;
+    public static int ganancia_neta_nintendo;
+    public static int costos_operativos;
+    public static int ganancia_bruta;
     int dlcs;
     int min_juegos;
 
@@ -46,6 +48,8 @@ public class Nintendo {
         this.min_juegos = 5;
         this.ganancia_neta_nintendo = 0;
     }
+    
+    
 
     // Getters para las variables miembro que deseas acceder desde fuera de la clase
     public Semaphore getDriveNarrativa() {

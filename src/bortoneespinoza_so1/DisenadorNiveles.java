@@ -35,6 +35,7 @@ public class DisenadorNiveles extends Thread {
     // Metodo para calcular el salario del desarrollador
     public void calcular_salario(int dias_trabajados) {
         sueldo = (dias_trabajados * 24) * pago_por_hora;
+        Nintendo.costos_operativos += sueldo;
     }
 
     // Metodo para generar el Nivel por parte del desarrollador

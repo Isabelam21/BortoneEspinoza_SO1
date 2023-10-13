@@ -31,15 +31,12 @@ public class ArtistaSprites extends Thread {
         this.driveS = driveS;
         this.id_empresa = id_empresa;
         this.dias_temporal = 0;
-        this.sprites_generados = 0;
 
     }
 
     public void calcular_salario(int dias_trabajados) {
         sueldo = (dias_trabajados * 24) * pago_por_hora;
-        System.out.println(dias_trabajados);
-        System.out.println(sueldo);
-
+        Nintendo.costos_operativos += sueldo;
     }
 
     public void generarSprite() {

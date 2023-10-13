@@ -23,12 +23,12 @@ public class ProjectManager extends Thread {
         this.sueldo = 0;
         this.dias_trabajados = dias_trabajados;
         this.pago_por_hora = 20;
-        this.faltas = 0;
     }
 
     // Metodo para calcular el salario del desarrollador
     public void calcular_salario(int dias_trabajados) {
         sueldo = (dias_trabajados * 24) * pago_por_hora;
+        Nintendo.costos_operativos += sueldo;
     }
 
     @Override

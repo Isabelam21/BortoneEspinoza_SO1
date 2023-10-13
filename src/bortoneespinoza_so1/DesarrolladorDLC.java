@@ -31,13 +31,12 @@ public class DesarrolladorDLC extends Thread {
         this.driveDLC = drive;
         this.id_empresa = empresa;
         this.dias_temporal = 0;
-        this.dlc_generados = 0;
-
     }
 
     // Metodo para calcular el salario del desarrollador
     public void calcular_salario(int dias_trabajados) {
         sueldo = (dias_trabajados * 24) * pago_por_hora;
+        Nintendo.costos_operativos += sueldo;
     }
 
     // Metodo para generar el Guion por parte del desarrollador

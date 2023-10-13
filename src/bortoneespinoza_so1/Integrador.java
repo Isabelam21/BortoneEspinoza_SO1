@@ -62,6 +62,7 @@ public class Integrador extends Thread {
     public void calcular_salario(int dias_trabajados) {
         int pago_por_hora = 25;
         salario = (dias_trabajados * 24) * pago_por_hora;
+        Nintendo.costos_operativos += salario;
     }
 
     //Calcular cantidad de permisos ocupados en un drive
