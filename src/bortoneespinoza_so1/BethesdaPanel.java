@@ -4,6 +4,8 @@
  */
 package bortoneespinoza_so1;
 import bortoneespinoza_so1.Main;
+import static bortoneespinoza_so1.NintendoPanel.guionesND;
+import static bortoneespinoza_so1.NintendoPanel.pm;
 
 /**
  *
@@ -14,6 +16,19 @@ public class BethesdaPanel extends javax.swing.JPanel {
     /**
      * Creates new form NintendoPanel
      */
+    int spinner_narrativa;
+    int cant_desarrolladores;
+    Bethesda bethesda = new Bethesda();
+    ProjectManager hilo7 = new ProjectManager(3);
+
+    public static void actualizarGuionesEnDrive(int nuevoValor) {
+        guionesND.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarValuePm(String nuevoValor) {
+        pm.setText(nuevoValor);
+    }
+    
     public BethesdaPanel() {
         
         initComponents();
@@ -78,9 +93,10 @@ public class BethesdaPanel extends javax.swing.JPanel {
         jLabel41 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
+        pm = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
         BgBethesda = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -295,9 +311,9 @@ public class BethesdaPanel extends javax.swing.JPanel {
         jLabel43.setText("Descontado:");
         jPanel1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 70, 20));
 
-        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel44.setText("Estado");
-        jPanel1.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 170, 20));
+        pm.setForeground(new java.awt.Color(255, 255, 255));
+        pm.setText("Estado");
+        jPanel1.add(pm, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 170, 20));
 
         jLabel45.setForeground(new java.awt.Color(255, 255, 255));
         jLabel45.setText("0");
@@ -307,6 +323,10 @@ public class BethesdaPanel extends javax.swing.JPanel {
         jLabel46.setForeground(new java.awt.Color(255, 255, 255));
         jLabel46.setText("Faltas:");
         jPanel1.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 40, 20));
+
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setText("$");
+        jPanel1.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 40, -1));
 
         BgBethesda.setBackground(new java.awt.Color(153, 153, 153));
         BgBethesda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bgBethesda1 (1)-modified.jpg"))); // NOI18N
@@ -356,9 +376,9 @@ public class BethesdaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -371,5 +391,6 @@ public class BethesdaPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JSpinner jSpinner5;
     private javax.swing.JSpinner jSpinner6;
+    public static javax.swing.JLabel pm;
     // End of variables declaration//GEN-END:variables
 }

@@ -142,6 +142,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel42 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         BgMario = new javax.swing.JLabel();
 
@@ -368,6 +369,10 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel47.setText("0");
         jPanel1.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 20, 20));
 
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("$");
+        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 40, -1));
+
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
         jLabel44.setText("Estado");
         jPanel1.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 160, 20));
@@ -407,6 +412,7 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
