@@ -39,10 +39,8 @@ public class ProjectManager extends Thread {
                 try {
                     if (streams) {
                         Thread.sleep(25); // 30 minutos para ver streams
-                        System.out.println("streams");
                     } else {
                         Thread.sleep(25); // 30 minutos para trabajar
-                        System.out.println("trabajando");
                     }
                     if (streams) {
                         String valor_pm = "Viendo Streams";
@@ -60,7 +58,6 @@ public class ProjectManager extends Thread {
                 try {
                     dias_restantes--;
                     Thread.sleep(600); // 30 minutos para cambiar el contador de días restantes
-                    System.out.println("Ultimas 8 horas (trabajando con el contador)");
                 } catch (InterruptedException ex) {
                     System.out.println("ERROR");
                 }
@@ -70,7 +67,6 @@ public class ProjectManager extends Thread {
 
             }
         }
-
     }
 
     public static int getDias_restantes() {
@@ -108,7 +104,4 @@ public class ProjectManager extends Thread {
     public static int getMAX_PRIORITY() {
         return MAX_PRIORITY;
     }
-    
-    
-
 }

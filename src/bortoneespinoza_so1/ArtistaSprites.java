@@ -47,8 +47,6 @@ public class ArtistaSprites extends Thread {
             driveS.acquire(2);
             sprites_generados = sprites_generados + 2;
             NintendoPanel.actualizarSpritesDriveN(sprites_generados);
-            System.out.println("Nivel agregado al drive");
-
         } catch (InterruptedException ex) {
             System.out.println("Drive full, libere espacio");
         }

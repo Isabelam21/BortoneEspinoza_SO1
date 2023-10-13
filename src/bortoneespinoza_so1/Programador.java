@@ -45,8 +45,6 @@ public class Programador extends Thread {
             driveP.acquire(3);
             sistemas_generados = sistemas_generados + 3;
             NintendoPanel.actualizarSistemasDriveN(sistemas_generados);
-            System.out.println("Nivel agregado al drive");
-
         } catch (InterruptedException ex) {
             System.out.println("Drive full, libere espacio");
         }
@@ -67,7 +65,7 @@ public class Programador extends Thread {
             } catch (InterruptedException ex) {
                 System.out.println("ERROR");
             }
+            generarSistema();
         }
-        generarSistema();
     }
 }

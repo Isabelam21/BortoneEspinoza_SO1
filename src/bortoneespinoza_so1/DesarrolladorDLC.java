@@ -42,14 +42,11 @@ public class DesarrolladorDLC extends Thread {
 
     // Metodo para generar el Guion por parte del desarrollador
     public static void generarDLC() {
-        System.out.println("DESARROLLADOR");
         try {
             driveDLC.acquire(1);
             dlc_generados++;
             NintendoPanel.actualizarDLCDriveN(dlc_generados);
-            System.out.println("DLC agregado al drive");
         } catch (InterruptedException ex) {
-
             System.out.println("Drive full, libere espacio");
         }
         dias_temporal = 0;
@@ -68,7 +65,6 @@ public class DesarrolladorDLC extends Thread {
             } catch (InterruptedException ex) {
                 System.out.println("ERROR");
             }
-
             generarDLC();
         }
     }

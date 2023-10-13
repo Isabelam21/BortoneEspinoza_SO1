@@ -41,17 +41,12 @@ public class DesarrolladorNarrativa extends Thread {
 
     // Metodo para generar el Guion por parte del desarrollador
     public static void generarGuion() {
-        System.out.println("DESARROLLADOR");
         try {
             driveN.acquire(1);
             guiones_generados++;
             NintendoPanel.actualizarGuionesEnDrive(guiones_generados);
-            System.out.println("Guion agregado al drive");
-            System.out.println("Guiones generados: " + guiones_generados);
-
         } catch (InterruptedException ex) {
             Logger.getLogger(DesarrolladorNarrativa.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Drive full, libere espacio");
         }
         dias_temporal = 0;
     }

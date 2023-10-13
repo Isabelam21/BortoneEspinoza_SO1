@@ -12,6 +12,7 @@ import javax.swing.JSpinner;
  * @author giubo
  */
 public class Nintendo {
+
     int id;
     Semaphore driveNarrativa;
     Semaphore driveNiveles;
@@ -27,7 +28,6 @@ public class Nintendo {
     static int ganancia_neta_nintendo;
     int dlcs;
     int min_juegos;
-    
 
     public Nintendo() {
         this.id = 1;
@@ -40,21 +40,18 @@ public class Nintendo {
         this.niveles = 1;
         this.graficos = 4;
         this.sistemas_abundantes = 4;
+        this.dlcs = 2;
         this.ganancia_est = 550000;
         this.ganancia_dlc = 600000;
         this.min_juegos = 5;
-        this.dlcs = 2;    
         this.ganancia_neta_nintendo = 0;
     }
-    
-  
-   
+
     // Getters para las variables miembro que deseas acceder desde fuera de la clase
     public Semaphore getDriveNarrativa() {
         return driveNarrativa;
     }
 
-    
     public int getGuiones() {
         return guiones;
     }
@@ -86,7 +83,7 @@ public class Nintendo {
     public int getMin_juegos() {
         return min_juegos;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -110,16 +107,11 @@ public class Nintendo {
     public Semaphore getDriveDCL() {
         return driveDCL;
     }
-    
+
     public int getDriveDlcs() {
         return dlcs;
     }
-    
-    
 
- 
-    
-    
     // Setters para las variables miembro que deseas actualizar desde fuera de la clase
     public void setGuiones(int guiones) {
         this.guiones = guiones;
@@ -136,8 +128,7 @@ public class Nintendo {
     public void setSistemas_abundantes(int sistemas_abundantes) {
         this.sistemas_abundantes = sistemas_abundantes;
     }
-    
-    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -162,7 +153,6 @@ public class Nintendo {
         this.driveDCL = driveDCL;
     }
 
-    
     public void setGanancia_est(int ganancia_est) {
         this.ganancia_est = ganancia_est;
     }
@@ -178,8 +168,5 @@ public class Nintendo {
     public void setMin_juegos(int min_juegos) {
         this.min_juegos = min_juegos;
     }
-    
-    
+
 }
-
-

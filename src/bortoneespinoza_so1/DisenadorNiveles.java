@@ -39,14 +39,10 @@ public class DisenadorNiveles extends Thread {
 
     // Metodo para generar el Nivel por parte del desarrollador
     public static void generarNivel() {
-        System.out.println("DESARROLLADOR");
         try {
             driveNiveles.acquire(1);
             niveles_generados++;
             NintendoPanel.actualizarNivelesDriveN(niveles_generados); // Se actualiza el valor en la interfaz
-            System.out.println("Nivel agregado al drive");
-            System.out.println("Niveles generados: " + niveles_generados);
-
         } catch (InterruptedException ex) {
             System.out.println("Drive full, libere espacio");
         }

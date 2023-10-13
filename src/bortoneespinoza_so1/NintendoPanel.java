@@ -51,10 +51,6 @@ public class NintendoPanel extends javax.swing.JPanel {
         dlcND.setText(Integer.toString(nuevoValor));
     }
 
-    public static void actualizarIntegradoresVideojuegosDriveN(int nuevoValor) {
-        integradoresND.setText(Integer.toString(nuevoValor));
-    }
-
     public static void actualizarNivelesDriveN(int nuevoValor) {
         nivelesND.setText(Integer.toString(nuevoValor));
     }
@@ -65,6 +61,18 @@ public class NintendoPanel extends javax.swing.JPanel {
 
     public static void actualizarSpritesDriveN(int nuevoValor) {
         spritesND.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarJuegosEsambladosTotales(int nuevoValor) {
+        juegosListosTotal.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarJuegosEsambladosEst(int nuevoValor) {
+        juegosEsambladosEst.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarJuegosEsambladosDcl(int nuevoValor) {
+        juegosEsambladosDcl.setText(Integer.toString(nuevoValor));
     }
 
     public NintendoPanel() {
@@ -279,7 +287,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         // Crear hilos integradores
         spinner_integrador = (int) spinnerIntegradores.getValue();
         if (spinner_integrador == 1) {
-            Integrador integrador = new Integrador(nintendo.getId(), nintendo.getGuiones(), nintendo.getNiveles(), nintendo.getGraficos(), nintendo.getSistemas_abundantes(), nintendo.driveNarrativa, nintendo.driveDCL, nintendo.driveNiveles, 5, 2);
+            Integrador integrador = new Integrador(nintendo.getId(), nintendo.getGuiones(), nintendo.getNiveles(), nintendo.getGraficos(), nintendo.getSistemas_abundantes(), nintendo.driveNarrativa, nintendo.driveDCL, nintendo.driveNiveles, nintendo.driveSprites, nintendo.driveProgramador, 5, 2);
             cant_desarrolladores++;
             integrador.start();
         }
@@ -293,7 +301,7 @@ public class NintendoPanel extends javax.swing.JPanel {
                 if (nuevoValorSpinner > spinner_integrador) {
 
                     for (int i = 0; i < spinner_integrador; i++) {
-                        integradores[i] = new Integrador(nintendo.getId(), nintendo.getGuiones(), nintendo.getNiveles(), nintendo.getGraficos(), nintendo.getSistemas_abundantes(), nintendo.driveNarrativa, nintendo.driveDCL, nintendo.driveNiveles, 5, 2);
+                        integradores[i] = new Integrador(nintendo.getId(), nintendo.getGuiones(), nintendo.getNiveles(), nintendo.getGraficos(), nintendo.getSistemas_abundantes(), nintendo.driveNarrativa, nintendo.driveDCL, nintendo.driveNiveles, nintendo.driveSprites, nintendo.driveProgramador, 5, 2);
                     }
 
                     // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
@@ -346,12 +354,10 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -374,10 +380,9 @@ public class NintendoPanel extends javax.swing.JPanel {
         spritesND = new javax.swing.JLabel();
         sistemasND = new javax.swing.JLabel();
         dlcND = new javax.swing.JLabel();
-        integradoresND = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
+        juegosEsambladosEst = new javax.swing.JLabel();
+        juegosEsambladosDcl = new javax.swing.JLabel();
+        juegosListosTotal = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         dir = new javax.swing.JLabel();
         BgMario = new javax.swing.JLabel();
@@ -396,7 +401,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("DCL:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 40, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 40, 30));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Programador Lógica:");
@@ -465,10 +470,6 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel18.setText("Sprites:");
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Videojuegos:");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
-
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Niveles:");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, -1));
@@ -486,11 +487,6 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("DCL´s:");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
-
-        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("/1 ->2 días");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -521,7 +517,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("Estándar:");
-        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 70, 30));
+        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 70, 30));
 
         jLabel31.setBackground(new java.awt.Color(204, 51, 0));
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -585,21 +581,17 @@ public class NintendoPanel extends javax.swing.JPanel {
         dlcND.setText("0");
         jPanel1.add(dlcND, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 20, -1));
 
-        integradoresND.setForeground(new java.awt.Color(255, 255, 255));
-        integradoresND.setText("0");
-        jPanel1.add(integradoresND, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 20, -1));
+        juegosEsambladosEst.setForeground(new java.awt.Color(255, 255, 255));
+        juegosEsambladosEst.setText("0");
+        jPanel1.add(juegosEsambladosEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 20, -1));
 
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("0");
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 20, -1));
+        juegosEsambladosDcl.setForeground(new java.awt.Color(255, 255, 255));
+        juegosEsambladosDcl.setText("0");
+        jPanel1.add(juegosEsambladosDcl, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 20, -1));
 
-        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel42.setText("0");
-        jPanel1.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 20, -1));
-
-        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel41.setText("0");
-        jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 20, -1));
+        juegosListosTotal.setForeground(new java.awt.Color(255, 255, 255));
+        juegosListosTotal.setText("0");
+        jPanel1.add(juegosListosTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 20, -1));
 
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setText("Faltas:");
@@ -624,7 +616,6 @@ public class NintendoPanel extends javax.swing.JPanel {
     public static javax.swing.JLabel dlcND;
     public static javax.swing.JLabel faltas_pm;
     public static javax.swing.JLabel guionesND;
-    public static javax.swing.JLabel integradoresND;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -635,13 +626,11 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -651,10 +640,7 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
@@ -663,6 +649,9 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    public static javax.swing.JLabel juegosEsambladosDcl;
+    public static javax.swing.JLabel juegosEsambladosEst;
+    public static javax.swing.JLabel juegosListosTotal;
     public static javax.swing.JLabel nivelesND;
     public static javax.swing.JLabel pm;
     public static javax.swing.JLabel sistemasND;
