@@ -6,45 +6,79 @@ package bortoneespinoza_so1;
 
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author isabe
  */
 public class NintendoPanel extends javax.swing.JPanel {
-        int spinner_narrativa;
-        Nintendo nintendo = new Nintendo();
 
-    
-   
+    int spinner_narrativa;
+    int cant_desarrolladores;
+    Nintendo nintendo = new Nintendo();
+    ProjectManager hilo7 = new ProjectManager(3);
+
+    public static void actualizarGuionesEnDrive(int nuevoValor) {
+        guionesND.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarValuePm(String nuevoValor) {
+        pm.setText(nuevoValor);
+    }
+
     public NintendoPanel() {
-
         initComponents();
-        
-        int spinner_narrativa = (int) spinnerNarrativa.getValue();
-        
+        spinner_narrativa = (int) spinnerNarrativa.getValue();
+        cant_desarrolladores = 0;
+
+// Crear hilos desarollador narrativa
+        hilo7.start();
         if (spinner_narrativa == 1) {
             DesarrolladorNarrativa desarrollador = new DesarrolladorNarrativa(nintendo.getDriveNarrativa(), 3, nintendo.getId());
+            cant_desarrolladores++;
+            System.out.println(cant_desarrolladores);
             desarrollador.start();
-        } else {
-            DesarrolladorNarrativa[] desarrolladoresNarrativa = new DesarrolladorNarrativa[spinner_narrativa];
-            for (int i = 0; i < spinner_narrativa; i++) {
-                desarrolladoresNarrativa[i] = new DesarrolladorNarrativa(nintendo.getDriveNarrativa(), 3, nintendo.getId());
-            }
+        }
 
-            // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
-            for (DesarrolladorNarrativa desarrollador : desarrolladoresNarrativa) {
-                desarrollador.start();
-              
+        spinnerNarrativa.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("Hols");
+                int nuevoValorSpinner = (int) spinnerNarrativa.getValue();
+
+                DesarrolladorNarrativa[] desarrolladoresNarrativa = new DesarrolladorNarrativa[spinner_narrativa];
+                if (nuevoValorSpinner > spinner_narrativa) {
+
+                    for (int i = 0; i < spinner_narrativa; i++) {
+                        desarrolladoresNarrativa[i] = new DesarrolladorNarrativa(nintendo.getDriveNarrativa(), 3, nintendo.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (DesarrolladorNarrativa desarrollador : desarrolladoresNarrativa) {
+                        cant_desarrolladores++;
+                        System.out.println(cant_desarrolladores);
+                        desarrollador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_narrativa = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_narrativa) {
+                    for (int i = 0; i < spinner_narrativa; i++) {
+                        if (desarrolladoresNarrativa[i] != null) {
+                            cant_desarrolladores--;
+                            System.out.println(cant_desarrolladores);
+                            desarrolladoresNarrativa[i].interrupt();
+                        }
+                    }
+
+                }
             }
         }
-    
+        );
 
     }
-    
-  
-
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,6 +129,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         jSpinner5 = new javax.swing.JSpinner();
         jSpinner6 = new javax.swing.JSpinner();
         guionesND = new javax.swing.JLabel();
+        pm = new javax.swing.JLabel();
         BgMario = new javax.swing.JLabel();
 
         jLabel33.setText("jLabel33");
@@ -257,6 +292,10 @@ public class NintendoPanel extends javax.swing.JPanel {
         guionesND.setText("0");
         jPanel1.add(guionesND, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 30, 20));
 
+        pm.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        pm.setText("Valor pm");
+        jPanel1.add(pm, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 80, 20));
+
         BgMario.setForeground(new java.awt.Color(124, 124, 124));
         BgMario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bgMario (1)-modified.png"))); // NOI18N
         jPanel1.add(BgMario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
@@ -305,6 +344,7 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JSpinner jSpinner5;
     private javax.swing.JSpinner jSpinner6;
+    public static javax.swing.JLabel pm;
     public static javax.swing.JSpinner spinnerNarrativa;
     // End of variables declaration//GEN-END:variables
 

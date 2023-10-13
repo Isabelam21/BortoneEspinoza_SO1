@@ -47,6 +47,7 @@ public class DesarrolladorNarrativa extends Thread {
         try {
             driveN.acquire(1);
             guiones_generados++;
+            NintendoPanel.actualizarGuionesEnDrive(guiones_generados);
             System.out.println("Guion agregado al drive");
             System.out.println("Guiones generados: " + guiones_generados);
 
