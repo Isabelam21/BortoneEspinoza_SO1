@@ -23,7 +23,7 @@ public class DisenadorNiveles extends Thread {
     static int dias_temporal;
     static int niveles_generados;
 
-    public DisenadorNiveles(Semaphore drive, int sueldo, int dias_nivel, int dias_trabajados, int pago_por_hora, int empresa) {
+    public DisenadorNiveles(Semaphore drive, int dias_nivel, int empresa) {
         this.sueldo = 0;
         this.driveNiveles = drive;
         this.dias_nivel = 3;
@@ -43,6 +43,7 @@ public class DisenadorNiveles extends Thread {
         try {
             driveNiveles.acquire(1);
             niveles_generados++;
+            NintendoPanel.actualizarNivelesDriveN(niveles_generados); // Se actualiza el valor en la interfaz
             System.out.println("Nivel agregado al drive");
             System.out.println("Niveles generados: " + niveles_generados);
 

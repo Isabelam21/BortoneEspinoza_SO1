@@ -13,7 +13,7 @@ import java.util.Random;
  * @author giubo
  */
 public class Director extends Thread {
-    
+
     int sueldo;
     int contador;
     int pago_por_hora;
@@ -27,8 +27,10 @@ public class Director extends Thread {
     int ganancia_empresa;
     int ganancia_neta_nintendo;
     int ganancia_neta_bethesda;
+    int descontado;
+    boolean trabajando;
 
-    public Director(int contador, int sueldo_pm, boolean streams, int faltas_pm, int juegos_disponibles, int empresa_id, int ganancia_empresa) {
+    public Director(int contador, int sueldo_pm, boolean streams, int juegos_disponibles, int empresa_id, int ganancia_empresa) {
         this.sueldo = 30;
         this.contador = contador;
         this.pago_por_hora = 30;
@@ -40,7 +42,9 @@ public class Director extends Thread {
         this.empresa_id = empresa_id;
         this.ganancia_empresa = ganancia_empresa;
         this.ganancia_neta_nintendo = 0;
-        this.ganancia_neta_bethesda= 0;
+        this.ganancia_neta_bethesda = 0;
+        this.descontado = 0;
+        this.trabajando = true;
     }
 
     // Metodo para calcular el salario del desarrollador
@@ -50,20 +54,23 @@ public class Director extends Thread {
 
     // Funcion para enviar juegos a tienda si estan listos
     public void enviar_juegos() {
-        if (empresa_id == 1){
+        if (empresa_id == 1) {
             int ganancia_neta_nintendo = juegos_disponibles * ganancia_empresa;
-        }else{
-             int ganancia_neta_bethesda = juegos_disponibles * ganancia_empresa;
+        } else {
+            int ganancia_neta_bethesda = juegos_disponibles * ganancia_empresa;
         }
         contador = 0;
 
     }
-    
+
     // Vigilar al PM
     public void vigilar_pm() {
         faltas_pm++;
-        sueldo_pm = sueldo_pm - 50;
+        NintendoPanel.actualizarValueFaltas(faltas_pm);
+        NintendoPanel.actualizarValueDescontado(descontado);
+        descontado = descontado + 50;
     }
+
     // Trabajo administrativo
     public void trabajo() {
         try {
@@ -82,17 +89,26 @@ public class Director extends Thread {
             trabajo();
             dias_trabajados++;
             calcular_salario(dias_trabajados);
-
         }
         if (contador == 0) {
             try {
+                trabajando = !trabajando;
                 enviar_juegos();
                 Thread.sleep(1000);
-
             } catch (InterruptedException ex) {
                 java.util.logging.Logger.getLogger(Director.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
+
+        if (trabajando) {
+            String valor_dir = "Trabajando";
+            NintendoPanel.actualizarValueDir(valor_dir);
+        } else {
+            String valor_dir = "Armando juego";
+            NintendoPanel.actualizarValueDir(valor_dir);
+        }
+        
+        
 
     }
 

@@ -73,4 +73,42 @@ public class ProjectManager extends Thread {
 
     }
 
+    public static int getDias_restantes() {
+        return dias_restantes;
+    }
+
+    public static boolean isStreams() {
+        return streams;
+    }
+
+    public static int getSueldo() {
+        return sueldo;
+    }
+
+    public int getDias_trabajados() {
+        return dias_trabajados;
+    }
+
+    public int getPago_por_hora() {
+        return pago_por_hora;
+    }
+
+    public int getFaltas() {
+        return faltas;
+    }
+
+    public static int getMIN_PRIORITY() {
+        return MIN_PRIORITY;
+    }
+
+    public static int getNORM_PRIORITY() {
+        return NORM_PRIORITY;
+    }
+
+    public static int getMAX_PRIORITY() {
+        return MAX_PRIORITY;
+    }
+    
+    
+
 }

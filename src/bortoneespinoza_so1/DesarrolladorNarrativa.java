@@ -32,8 +32,6 @@ public class DesarrolladorNarrativa extends Thread {
         this.driveN = drive;
         this.id_empresa = empresa;
         this.dias_temporal = 0;
-        this.guiones_generados = 0;
-
     }
 
     // Metodo para calcular el salario del desarrollador

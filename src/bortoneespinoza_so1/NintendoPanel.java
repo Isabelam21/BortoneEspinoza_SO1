@@ -15,10 +15,17 @@ import javax.swing.event.ChangeListener;
  */
 public class NintendoPanel extends javax.swing.JPanel {
 
-    int spinner_narrativa;
     int cant_desarrolladores;
+    int spinner_narrativa;
+    int spinner_niveles;
+    int spinner_sprites;
+    int spinner_sistemas;
+    int spinner_dlc;
+    int spinner_integrador;
+
     Nintendo nintendo = new Nintendo();
-    ProjectManager hilo7 = new ProjectManager(3);
+    ProjectManager project_manager = new ProjectManager(3);
+    Director director = new Director(4, project_manager.getSueldo(), project_manager.isStreams(), 7, nintendo.getId(), nintendo.getGanancia_neta_nintendo());
 
     public static void actualizarGuionesEnDrive(int nuevoValor) {
         guionesND.setText(Integer.toString(nuevoValor));
@@ -28,13 +35,47 @@ public class NintendoPanel extends javax.swing.JPanel {
         pm.setText(nuevoValor);
     }
 
+    public static void actualizarValueFaltas(int nuevoValor) {
+        faltas_pm.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarValueDescontado(int nuevoValor) {
+        descontado_pm.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarValueDir(String nuevoValor) {
+        dir.setText(nuevoValor);
+    }
+
+    public static void actualizarDLCDriveN(int nuevoValor) {
+        dlcND.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarIntegradoresVideojuegosDriveN(int nuevoValor) {
+        integradoresND.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarNivelesDriveN(int nuevoValor) {
+        nivelesND.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarSistemasDriveN(int nuevoValor) {
+        sistemasND.setText(Integer.toString(nuevoValor));
+    }
+
+    public static void actualizarSpritesDriveN(int nuevoValor) {
+        spritesND.setText(Integer.toString(nuevoValor));
+    }
+
     public NintendoPanel() {
         initComponents();
-        spinner_narrativa = (int) spinnerNarrativa.getValue();
         cant_desarrolladores = 0;
 
-// Crear hilos desarollador narrativa
-        hilo7.start();
+        project_manager.start();
+        director.start();
+
+        // Crear hilos desarollador narrativa
+        spinner_narrativa = (int) spinnerNarrativa.getValue();
         if (spinner_narrativa == 1) {
             DesarrolladorNarrativa desarrollador = new DesarrolladorNarrativa(nintendo.getDriveNarrativa(), 3, nintendo.getId());
             cant_desarrolladores++;
@@ -75,8 +116,204 @@ public class NintendoPanel extends javax.swing.JPanel {
 
                 }
             }
+        });
+
+        // Crear hilos desarollador niveles
+        spinner_niveles = (int) spinnerNiveles.getValue();
+        if (spinner_niveles == 1) {
+            DisenadorNiveles disenadorNiveles = new DisenadorNiveles(nintendo.getDriveNiveles(), 3, nintendo.getId());
+            cant_desarrolladores++;
+            disenadorNiveles.start();
         }
-        );
+
+        spinnerNiveles.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int nuevoValorSpinner = (int) spinnerNiveles.getValue();
+
+                DisenadorNiveles[] disenadorNiveles = new DisenadorNiveles[spinner_niveles];
+                if (nuevoValorSpinner > spinner_niveles) {
+
+                    for (int i = 0; i < spinner_niveles; i++) {
+                        disenadorNiveles[i] = new DisenadorNiveles(nintendo.getDriveNiveles(), 3, nintendo.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (DisenadorNiveles desarrollador : disenadorNiveles) {
+                        cant_desarrolladores++;
+                        desarrollador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_niveles = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_niveles) {
+                    for (int i = 0; i < spinner_niveles; i++) {
+                        if (disenadorNiveles[i] != null) {
+                            cant_desarrolladores--;
+                            disenadorNiveles[i].interrupt();
+                        }
+                    }
+
+                }
+            }
+        });
+
+        // Crear hilos desarollador sprites
+        spinner_sprites = (int) spinnerSprites.getValue();
+        if (spinner_sprites == 1) {
+            ArtistaSprites artistaSprite = new ArtistaSprites(nintendo.getDriveSprites(), 3, nintendo.getId());
+            cant_desarrolladores++;
+            artistaSprite.start();
+        }
+
+        spinnerSprites.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int nuevoValorSpinner = (int) spinnerSprites.getValue();
+
+                ArtistaSprites[] artistaSprite = new ArtistaSprites[spinner_sprites];
+                if (nuevoValorSpinner > spinner_sprites) {
+
+                    for (int i = 0; i < spinner_sprites; i++) {
+                        artistaSprite[i] = new ArtistaSprites(nintendo.getDriveSprites(), 3, nintendo.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (ArtistaSprites artista : artistaSprite) {
+                        cant_desarrolladores++;
+                        artista.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_sprites = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_sprites) {
+                    for (int i = 0; i < spinner_sprites; i++) {
+                        if (artistaSprite[i] != null) {
+                            cant_desarrolladores--;
+                            System.out.println(cant_desarrolladores);
+                            artistaSprite[i].interrupt();
+                        }
+                    }
+                }
+            }
+        });
+
+        // Crear hilos desarollador sistemas
+        spinner_sistemas = (int) spinnerSistemas.getValue();
+        if (spinner_sistemas == 1) {
+            Programador programadorLogica = new Programador(nintendo.getDriveProgramador(), 3, nintendo.getId());
+            cant_desarrolladores++;
+            programadorLogica.start();
+        }
+
+        spinnerSistemas.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int nuevoValorSpinner = (int) spinnerSistemas.getValue();
+
+                Programador[] programadorLogica = new Programador[spinner_sistemas];
+                if (nuevoValorSpinner > spinner_sistemas) {
+
+                    for (int i = 0; i < spinner_sistemas; i++) {
+                        programadorLogica[i] = new Programador(nintendo.getDriveProgramador(), 3, nintendo.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (Programador programador : programadorLogica) {
+                        cant_desarrolladores++;
+                        programador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_sistemas = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_sistemas) {
+                    for (int i = 0; i < spinner_sistemas; i++) {
+                        if (programadorLogica[i] != null) {
+                            cant_desarrolladores--;
+                            programadorLogica[i].interrupt();
+                        }
+                    }
+                }
+            }
+        });
+
+        // Crear hilos desarollador DLC
+        spinner_dlc = (int) spinnerDLC.getValue();
+        if (spinner_dlc == 1) {
+            DesarrolladorDLC desarrolladorDLC = new DesarrolladorDLC(nintendo.getDriveDCL(), 3, nintendo.getId());
+            cant_desarrolladores++;
+            desarrolladorDLC.start();
+        }
+
+        spinnerDLC.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int nuevoValorSpinner = (int) spinnerDLC.getValue();
+
+                DesarrolladorDLC[] desarrolladorDLC = new DesarrolladorDLC[spinner_dlc];
+                if (nuevoValorSpinner > spinner_dlc) {
+
+                    for (int i = 0; i < spinner_dlc; i++) {
+                        desarrolladorDLC[i] = new DesarrolladorDLC(nintendo.getDriveDCL(), 3, nintendo.getId());
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (DesarrolladorDLC devDLC : desarrolladorDLC) {
+                        cant_desarrolladores++;
+                        devDLC.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_dlc = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_dlc) {
+                    for (int i = 0; i < spinner_dlc; i++) {
+                        if (desarrolladorDLC[i] != null) {
+                            cant_desarrolladores--;
+                            desarrolladorDLC[i].interrupt();
+                        }
+                    }
+                }
+            }
+        });
+
+        // Crear hilos integradores
+        spinner_integrador = (int) spinnerIntegradores.getValue();
+        if (spinner_integrador == 1) {
+            Integrador integrador = new Integrador(nintendo.getId(), nintendo.getGuiones(), nintendo.getNiveles(), nintendo.getGraficos(), nintendo.getSistemas_abundantes(), nintendo.driveNarrativa, nintendo.driveDCL, nintendo.driveNiveles, 5, 2);
+            cant_desarrolladores++;
+            integrador.start();
+        }
+
+        spinnerIntegradores.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int nuevoValorSpinner = (int) spinnerIntegradores.getValue();
+
+                Integrador[] integradores = new Integrador[spinner_integrador];
+                if (nuevoValorSpinner > spinner_integrador) {
+
+                    for (int i = 0; i < spinner_integrador; i++) {
+                        integradores[i] = new Integrador(nintendo.getId(), nintendo.getGuiones(), nintendo.getNiveles(), nintendo.getGraficos(), nintendo.getSistemas_abundantes(), nintendo.driveNarrativa, nintendo.driveDCL, nintendo.driveNiveles, 5, 2);
+                    }
+
+                    // Ahora puedes acceder a los objetos DesarrolladorNarrativa a través del arreglo
+                    for (Integrador integrador : integradores) {
+                        cant_desarrolladores++;
+                        integrador.start();
+                    }
+
+                    // Actualiza valorSpinner con el nuevo valor del JSpinner
+                    spinner_integrador = nuevoValorSpinner;
+                } else if (nuevoValorSpinner < spinner_integrador) {
+                    for (int i = 0; i < spinner_integrador; i++) {
+                        if (integradores[i] != null) {
+                            cant_desarrolladores--;
+                            integradores[i].interrupt();
+                        }
+                    }
+                }
+            }
+        });
 
     }
 
@@ -123,26 +360,26 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         spinnerNarrativa = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        jSpinner3 = new javax.swing.JSpinner();
-        jSpinner4 = new javax.swing.JSpinner();
-        jSpinner5 = new javax.swing.JSpinner();
-        jSpinner6 = new javax.swing.JSpinner();
+        spinnerNiveles = new javax.swing.JSpinner();
+        spinnerSprites = new javax.swing.JSpinner();
+        spinnerSistemas = new javax.swing.JSpinner();
+        spinnerDLC = new javax.swing.JSpinner();
+        spinnerIntegradores = new javax.swing.JSpinner();
         guionesND = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
+        descontado_pm = new javax.swing.JLabel();
+        faltas_pm = new javax.swing.JLabel();
         pm = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
+        nivelesND = new javax.swing.JLabel();
+        spritesND = new javax.swing.JLabel();
+        sistemasND = new javax.swing.JLabel();
+        dlcND = new javax.swing.JLabel();
+        integradoresND = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
+        dir = new javax.swing.JLabel();
         BgMario = new javax.swing.JLabel();
 
         jLabel33.setText("jLabel33");
@@ -159,7 +396,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("DCL:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 50, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 40, 30));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Programador Lógica:");
@@ -284,7 +521,7 @@ public class NintendoPanel extends javax.swing.JPanel {
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("Estándar:");
-        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 80, 30));
+        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 70, 30));
 
         jLabel31.setBackground(new java.awt.Color(204, 51, 0));
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -295,62 +532,62 @@ public class NintendoPanel extends javax.swing.JPanel {
         spinnerNarrativa.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
         jPanel1.add(spinnerNarrativa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 50, -1));
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
-        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 50, -1));
+        spinnerNiveles.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
+        jPanel1.add(spinnerNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 50, -1));
 
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
-        jPanel1.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 50, -1));
+        spinnerSprites.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
+        jPanel1.add(spinnerSprites, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 50, -1));
 
-        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
-        jPanel1.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 50, -1));
+        spinnerSistemas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
+        jPanel1.add(spinnerSistemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 50, -1));
 
-        jSpinner5.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
-        jPanel1.add(jSpinner5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 50, -1));
+        spinnerDLC.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
+        jPanel1.add(spinnerDLC, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 50, -1));
 
-        jSpinner6.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
-        jPanel1.add(jSpinner6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 50, -1));
+        spinnerIntegradores.setModel(new javax.swing.SpinnerNumberModel(1, 1, 8, 1));
+        jPanel1.add(spinnerIntegradores, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 50, -1));
 
         guionesND.setForeground(new java.awt.Color(255, 255, 255));
         guionesND.setText("0");
         jPanel1.add(guionesND, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 30, 20));
 
-        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel43.setText("Descontado:");
-        jPanel1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 70, 20));
+        descontado_pm.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        descontado_pm.setForeground(new java.awt.Color(255, 255, 255));
+        descontado_pm.setText("0");
+        jPanel1.add(descontado_pm, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 70, 20));
 
-        jLabel46.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel46.setText("Faltas:");
-        jPanel1.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 40, 20));
+        faltas_pm.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        faltas_pm.setForeground(new java.awt.Color(255, 255, 255));
+        faltas_pm.setText("0");
+        jPanel1.add(faltas_pm, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 40, 20));
 
         pm.setForeground(new java.awt.Color(255, 255, 255));
         pm.setText("Valor pm");
-        jPanel1.add(pm, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 100, 20));
+        jPanel1.add(pm, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 100, 20));
 
         jLabel45.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel45.setText("0");
-        jPanel1.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 40, 20));
+        jLabel45.setText("Descontado:");
+        jPanel1.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 80, 20));
 
-        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setText("0");
-        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 20, -1));
+        nivelesND.setForeground(new java.awt.Color(255, 255, 255));
+        nivelesND.setText("0");
+        jPanel1.add(nivelesND, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 20, -1));
 
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setText("0");
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 20, -1));
+        spritesND.setForeground(new java.awt.Color(255, 255, 255));
+        spritesND.setText("0");
+        jPanel1.add(spritesND, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 20, -1));
 
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("0");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 20, -1));
+        sistemasND.setForeground(new java.awt.Color(255, 255, 255));
+        sistemasND.setText("0");
+        jPanel1.add(sistemasND, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 20, -1));
 
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setText("0");
-        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 20, -1));
+        dlcND.setForeground(new java.awt.Color(255, 255, 255));
+        dlcND.setText("0");
+        jPanel1.add(dlcND, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 20, -1));
 
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("0");
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 20, -1));
+        integradoresND.setForeground(new java.awt.Color(255, 255, 255));
+        integradoresND.setText("0");
+        jPanel1.add(integradoresND, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 20, -1));
 
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText("0");
@@ -365,23 +602,29 @@ public class NintendoPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 20, -1));
 
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel47.setText("0");
-        jPanel1.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 20, 20));
+        jLabel47.setText("Faltas:");
+        jPanel1.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 60, 20));
 
-        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel44.setText("Estado");
-        jPanel1.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 160, 20));
+        dir.setForeground(new java.awt.Color(255, 255, 255));
+        dir.setText("Estado");
+        jPanel1.add(dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 160, 20));
 
         BgMario.setForeground(new java.awt.Color(124, 124, 124));
         BgMario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bgMario (1)-modified.png"))); // NOI18N
-        jPanel1.add(BgMario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
+        BgMario.setText("0");
+        jPanel1.add(BgMario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 400));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 3, 470, 400));
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BgMario;
+    public static javax.swing.JLabel descontado_pm;
+    public static javax.swing.JLabel dir;
+    public static javax.swing.JLabel dlcND;
+    public static javax.swing.JLabel faltas_pm;
     public static javax.swing.JLabel guionesND;
+    public static javax.swing.JLabel integradoresND;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -408,19 +651,11 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -428,13 +663,16 @@ public class NintendoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
-    private javax.swing.JSpinner jSpinner5;
-    private javax.swing.JSpinner jSpinner6;
+    public static javax.swing.JLabel nivelesND;
     public static javax.swing.JLabel pm;
+    public static javax.swing.JLabel sistemasND;
+    private javax.swing.JSpinner spinnerDLC;
+    private javax.swing.JSpinner spinnerIntegradores;
     private javax.swing.JSpinner spinnerNarrativa;
+    private javax.swing.JSpinner spinnerNiveles;
+    private javax.swing.JSpinner spinnerSistemas;
+    private javax.swing.JSpinner spinnerSprites;
+    public static javax.swing.JLabel spritesND;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -23,7 +23,7 @@ public class ArtistaSprites extends Thread {
     int dias_temporal;
     int sprites_generados;
 
-    public ArtistaSprites(Semaphore driveS, int sprite_dias, int pago_por_hora, int empresa) {
+    public ArtistaSprites(Semaphore driveS, int sprite_dias, int empresa) {
         this.sueldo = 0;
         this.sprite_dias = 1;
         this.dias_trabajados = 0;
@@ -46,6 +46,7 @@ public class ArtistaSprites extends Thread {
         try {
             driveS.acquire(2);
             sprites_generados = sprites_generados + 2;
+            NintendoPanel.actualizarSpritesDriveN(sprites_generados);
             System.out.println("Nivel agregado al drive");
 
         } catch (InterruptedException ex) {

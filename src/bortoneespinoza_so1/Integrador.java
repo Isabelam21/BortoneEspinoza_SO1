@@ -21,7 +21,7 @@ public class Integrador extends Thread{
     int id_empresa;
     int guiones;
     int niveles;
-    int graficos;
+    int sprites;
     int sistemas_abundantes;
     Semaphore driveN;
     Semaphore driveDCL;
@@ -34,13 +34,13 @@ public class Integrador extends Thread{
     int permisos_ocupados;
  
     //Constructor
-    public Integrador(int id_empresa, int guiones, int niveles, int graficos, int sistemas_abundantes,  Semaphore driveN, Semaphore drive_DCL, Semaphore driveNiveles, int min_juegos, int dlcs) {
+    public Integrador(int id_empresa, int guiones, int niveles, int sprites, int sistemas_abundantes,  Semaphore driveN, Semaphore drive_DCL, Semaphore driveNiveles, int min_juegos, int dlcs) {
         this.id_empresa = id_empresa;
         // Condiciones para armar el juego
         this.dias_esamblar = 2;
         this.guiones = guiones;
         this.niveles = niveles;
-        this.graficos = graficos;
+        this.sprites = sprites;
         this.sistemas_abundantes = sistemas_abundantes;
         // Drives
         this.driveN = driveN;

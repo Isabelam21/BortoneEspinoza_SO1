@@ -103,6 +103,10 @@ public class Nintendo {
         return driveProgramador;
     }
 
+    public static int getGanancia_neta_nintendo() {
+        return ganancia_neta_nintendo;
+    }
+
     public Semaphore getDriveDCL() {
         return driveDCL;
     }

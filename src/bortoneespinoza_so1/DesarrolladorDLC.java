@@ -20,10 +20,10 @@ public class DesarrolladorDLC extends Thread {
     static Semaphore driveDLC;
     int id_empresa;
     static int dias_temporal;
-    static int guiones_generados;
+    static int dlc_generados;
 
     //Constructor 
-    public DesarrolladorDLC(Semaphore drive, int dias_dlc, int pago_por_hora, int empresa) {
+    public DesarrolladorDLC(Semaphore drive, int dias_dlc, int empresa) {
         this.sueldo = 0;
         this.dias_dlc = 3;
         this.dias_trabajados = 0;
@@ -31,7 +31,7 @@ public class DesarrolladorDLC extends Thread {
         this.driveDLC = drive;
         this.id_empresa = empresa;
         this.dias_temporal = 0;
-        this.guiones_generados = 0;
+        this.dlc_generados = 0;
 
     }
 
@@ -45,7 +45,8 @@ public class DesarrolladorDLC extends Thread {
         System.out.println("DESARROLLADOR");
         try {
             driveDLC.acquire(1);
-            guiones_generados++;
+            dlc_generados++;
+            NintendoPanel.actualizarDLCDriveN(dlc_generados);
             System.out.println("DLC agregado al drive");
         } catch (InterruptedException ex) {
 
