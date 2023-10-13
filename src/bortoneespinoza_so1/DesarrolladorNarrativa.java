@@ -45,8 +45,10 @@ public class DesarrolladorNarrativa extends Thread{
         try {
             driveN.acquire(1);
             guiones_generados++;
+            NintendoPanel.actualizarGuionDrive(guiones_generados);
             System.out.println("Guion agregado al drive");
             System.out.println("Guiones generados: " + guiones_generados);
+            
             
         } catch (InterruptedException ex) {
             Logger.getLogger(DesarrolladorNarrativa.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,9 +56,11 @@ public class DesarrolladorNarrativa extends Thread{
         }
         dias_temporal = 0;
     }
-   
     
- 
+    public int getGuiones() {
+        return guiones_generados;
+    }
+   
     @Override
     public void run(){
         while(dias_temporal < dias_guion)

@@ -34,16 +34,6 @@ public class Main {
         DesarrolladorNarrativa hilo5 = new DesarrolladorNarrativa(empresa1.getDriveNarrativa(), 3, 10, empresa1.getId());       
         Integrador hilo6 = new Integrador( 1, empresa1.getGuiones(), empresa1.getNiveles(), empresa1.getGraficos(), empresa1 .getSistemas_abundantes(), empresa1.getDriveNarrativa(), empresa1.getDriveDCL(), empresa1.getDriveNiveles() , 5 , empresa1.getDlcs());
         ProjectManager hilo7 = new ProjectManager(3);
-       
-        Bethesda empresa2 = new Bethesda();
-        
-        DesarrolladorNarrativa hilo8 = new DesarrolladorNarrativa(empresa1.getDriveNarrativa(), 4, 10, empresa2.getId());
-        DesarrolladorNarrativa hilo9 = new DesarrolladorNarrativa(empresa1.getDriveNarrativa(), 4, 10, empresa2.getId());
-        DesarrolladorNarrativa hilo10  = new DesarrolladorNarrativa(empresa1.getDriveNarrativa(), 4, 10, empresa2.getId());
-        DesarrolladorNarrativa hilo11  = new DesarrolladorNarrativa( empresa1.getDriveNarrativa(), 4, 10, empresa2.getId());
-        DesarrolladorNarrativa hilo12 = new DesarrolladorNarrativa(empresa1.getDriveNarrativa(), 4, 10, empresa2.getId());       
-        Integrador hilo13 = new Integrador( 2, empresa2.getGuiones(), empresa2.getNiveles(), empresa2.getGraficos(), empresa2 .getSistemas_abundantes(), empresa2.getDriveNarrativa(), empresa2.getDriveDCL(), empresa2.getDriveNiveles() , 5 , empresa2.getDlcs());
-        ProjectManager hilo14 = new ProjectManager(3);
         
         hilo1.start();
         hilo2.start();
@@ -52,6 +42,16 @@ public class Main {
         hilo5.start();
         hilo6.start();
         hilo7.start();
+        
+        Bethesda empresa2 = new Bethesda();
+        
+        DesarrolladorNarrativa hilo8 = new DesarrolladorNarrativa(empresa2.getDriveNarrativa(), 4, 10, empresa2.getId());
+        DesarrolladorNarrativa hilo9 = new DesarrolladorNarrativa(empresa2.getDriveNarrativa(), 4, 10, empresa2.getId());
+        DesarrolladorNarrativa hilo10  = new DesarrolladorNarrativa(empresa2.getDriveNarrativa(), 4, 10, empresa2.getId());
+        DesarrolladorNarrativa hilo11  = new DesarrolladorNarrativa( empresa2.getDriveNarrativa(), 4, 10, empresa2.getId());
+        DesarrolladorNarrativa hilo12 = new DesarrolladorNarrativa(empresa2.getDriveNarrativa(), 4, 10, empresa2.getId());       
+        Integrador hilo13 = new Integrador( 2, empresa2.getGuiones(), empresa2.getNiveles(), empresa2.getGraficos(), empresa2 .getSistemas_abundantes(), empresa2.getDriveNarrativa(), empresa2.getDriveDCL(), empresa2.getDriveNiveles() , 5 , empresa2.getDlcs());
+        ProjectManager hilo14 = new ProjectManager(3);
         
         hilo8.start();
         hilo9.start();
@@ -62,7 +62,6 @@ public class Main {
         hilo14.start();
         
         
-        
-    }
+        }
     
 }

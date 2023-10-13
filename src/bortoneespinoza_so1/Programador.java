@@ -8,7 +8,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  *
- * @author giubo
+ * @author isa
  */
 public class Programador extends Thread {
    
